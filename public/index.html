@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+    <link rel="icon" href="<%= BASE_URL %>logo.png">
+    <title>AI心世界后台管理系统</title>
+    <style type="text/css">
+      [v-cloak] {
+        display: none !important;
+      }
+    </style>
+    <script type="text/javascript">
+      (function (doc, win, pwidth, prem) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                  var clientWidth = docEl.clientWidth;
+                  if (!clientWidth) return;
+                  docEl.style.fontSize = clientWidth / pwidth * prem + 'px';
+                };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      })(document, window, 1920, 100);
+  
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but AI_heart doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  
+</html>
