@@ -200,12 +200,10 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="person" v-if="power11">
                 <i class="iconfont icon-wode" style="font-size:0.18rem"></i>
-                <!-- <img src="../assets/images/yonghu.png" alt="" /> -->
                 个人中心
               </el-dropdown-item>
               <el-dropdown-item command="logout">
                 <i class="el-icon-switch-button" style="font-size:0.18rem"></i>
-                <!-- <img src="../assets/images/yonghu.png" alt="" /> -->
                 退出登录
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -434,6 +432,7 @@ export default {
 </script>
 
 <style lang="less">
+  // 教育版
 .el-menu--vertical .el-menu--popup {
   min-width: auto;
   width: 1.4rem !important;
