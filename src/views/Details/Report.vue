@@ -2086,9 +2086,7 @@ export default {
               '<span style="color:#7786AC">' +
               params.name +
               "</span>" +
-              ':<span style="display:inline-block;font-weight:blod;margin-left:5px;font-size:14px;color:' +
-              params.color.colorStops[1].color +
-              '">' +
+              ':<span style="display:inline-block;font-weight:blod;margin-left:5px;font-size:14px;color:#7786AC">' +
               params.value +
               "</span>";
             return result;
@@ -2667,7 +2665,7 @@ export default {
       this.myChartRose.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
+          formatter: "{a} <br/>{b} : {d}%"
         },
         series: [
           {
@@ -2874,7 +2872,7 @@ export default {
         ],
         series: [
           {
-            name: "直接访问",
+            name: "使用数量",
             type: "bar",
             barWidth: "16",
             itemStyle: {
