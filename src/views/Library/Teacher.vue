@@ -105,7 +105,7 @@
           @sort-change="sortChange"
           @selection-change="handleSelectionChange"
         >
-          <el-table-column type="selection"> </el-table-column>
+          <el-table-column type="selection" :selectable="checkSelectable"> </el-table-column>
           <el-table-column prop="id" label="序号"> </el-table-column>
           <el-table-column prop="name" label="姓名"> </el-table-column>
           <el-table-column prop="passport" label="登录账号">
@@ -114,11 +114,10 @@
           <el-table-column prop="phone" label="手机号"> </el-table-column>
           <el-table-column prop="accountState" label="账号状态">
             <template slot-scope="scope">
-              
               <el-switch
                 v-model="scope.row.accountState"
                 @change="switchStatus(scope.row)"
-                :disabled="!power8"
+                :disabled="!power8 || scope.row.passport == 'administrator'"
               >
               </el-switch>
             </template>
@@ -136,7 +135,14 @@
                 type="text"
                 size="small"
                 @click="singleDelete(scope.row)"
-                v-if="power6"
+                v-if="power6 && scope.row.passport != 'administrator'"
+                >删除</el-button
+              >
+              <el-button
+                type="text"
+                size="small"
+                disabled
+                v-if="power6 && scope.row.passport == 'administrator'"
                 >删除</el-button
               >
             </template>
@@ -272,6 +278,9 @@ export default {
     this.getList(1);
   },
   methods: {
+    checkSelectable(row) {
+      return row.passport != 'administrator'
+    },
     powerData() {
       let power = JSON.parse(localStorage.getItem("userAuth")).menuAuthID;
       console.log(power);

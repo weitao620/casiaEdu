@@ -540,7 +540,8 @@ export default {
               this.$http
                 .get(Url + "/aimw/index", {
                   params: {
-                    passport: JSON.parse(localStorage.getItem("userInfo")).passport
+                    passport: JSON.parse(localStorage.getItem("userInfo")).passport,
+                    userAuth: localStorage.getItem("userAuth")
                   }
                 })
                 .then(res => {
@@ -702,6 +703,7 @@ export default {
                 }
               }
               // that.tableData = data;
+              console.log(that.tableData);
               console.log(data1);
             });
           console.log(data);
@@ -721,7 +723,8 @@ export default {
       this.$http
         .get(Url + "/aimw/index/trend", {
           params: {
-            days: that.days
+            days: that.days,
+            userAuth: localStorage.getItem("userAuth")
           }
         })
         .then(res => {

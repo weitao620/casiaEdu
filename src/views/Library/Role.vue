@@ -50,7 +50,7 @@
               <el-switch
                 v-model="scope.row.status"
                 @change="statusChange(scope.row)"
-                :disabled="!power2"
+                :disabled="!power2 || scope.row.roleID == 'superAdministrator'"
               >
               </el-switch>
             </template>
@@ -71,7 +71,10 @@
               <el-button v-if="power3" type="text" size="small" @click="powerSet(scope.row)"
                 >权限设置</el-button
               >
-              <el-button v-if="power5" type="text" size="small" @click="roleDelete(scope.row)"
+              <el-button v-if="power5 && scope.row.roleID != 'superAdministrator'" type="text" size="small" @click="roleDelete(scope.row)"
+                >删除</el-button
+              >
+              <el-button v-if="power5 && scope.row.roleID == 'superAdministrator'" type="text" size="small" style="color:#ccc !important"
                 >删除</el-button
               >
             </template>
@@ -132,7 +135,7 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item>
+        <el-form-item  v-show="roleForm.roleID != 'superAdministrator'">
           <div class="copy_role">
             <el-checkbox v-model="roleForm.copy"></el-checkbox>
             <span>复制</span>
@@ -183,7 +186,13 @@
           <el-table-column prop="phone" label="手机号"> </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="memberDelete(scope.row)"
+              <!-- <el-button type="text" size="small" @click="memberDelete(scope.row)"
+                >删除</el-button
+              > -->
+              <el-button v-if="scope.row.passport != 'administrator'" type="text" size="small" @click="memberDelete(scope.row)"
+                >删除</el-button
+              >
+              <el-button v-if="scope.row.passport == 'administrator'" type="text" size="small" style="color:#ccc !important"
                 >删除</el-button
               >
             </template>
@@ -529,6 +538,16 @@ export default {
         .then(res => {
           let data = res.data.data.results;
           console.log(data);
+          for (let j in that.teacherNew) {
+            for (let i in data) {
+              if (data[i]) {
+                if (data[i].passport == that.teacherNew[j].passport) {
+                  data.splice(i, 1)
+                  i = i - 1;
+                }
+              }
+            }
+          }
           that.dialogGroupAdd = true;
           for (let i in data) {
             data[i].check = false;
@@ -545,6 +564,11 @@ export default {
                   data.splice(i, 1)
                 }
               }
+            }
+          }
+          for (let i in data) {
+            if (data[i].passport == "administrator") {
+              data.splice(i, 1)
             }
           }
           that.teacherData = data;

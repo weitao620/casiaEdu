@@ -336,9 +336,10 @@
           <el-radio-group v-model="addClassForm.aside" @change="asideChange">
               <el-radio :label="2">班级</el-radio>
               <el-radio :label="1">年级</el-radio>
+              <el-radio v-if="schoolShow" :label="3">校级</el-radio>
             </el-radio-group>
         </el-form-item>
-        <el-form-item label="学段:">
+        <el-form-item v-if="!schoolFlag" label="学段:">
           <section class="address-select-list">
             <el-select
               class="adress-select"
@@ -355,7 +356,7 @@
             </el-select>
           </section>
         </el-form-item>
-        <el-form-item label="年级:">
+        <el-form-item v-if="!schoolFlag" label="年级:">
           <section class="address-select-list">
             <el-select
               class="adress-select"
@@ -431,10 +432,16 @@
       ></groupReport>
     </div>
     <!-- 年级 -->
-    <div style="height:0;width:100%;overflow:hidden">
+    <div style="height:;width:100%;overflow:hidden">
       <gradeReport
         :gList="groupList"
       ></gradeReport>
+    </div>
+    <!-- 校级 -->
+    <div style="height:0;width:100%;overflow:hidden">
+      <schoolReport
+        :gList="groupList"
+      ></schoolReport>
     </div>
   </div>
 </template>
@@ -445,6 +452,7 @@ import personReport from "../Model/ModelReport.vue";
 import someReport from "../Model/ExportPdf.vue";
 import groupReport from "../Model/ExportClass.vue";
 import gradeReport from "../Model/ExportGrade.vue";
+import schoolReport from "../Model/ExportSchool.vue";
 import { mapGetters, mapMutations } from "vuex";
 import Url from "@/assets/js/url.js";
 export default {
@@ -453,7 +461,8 @@ export default {
     personReport,
     someReport,
     groupReport,
-    gradeReport
+    gradeReport,
+    schoolReport
   },
   data() {
     return {
@@ -483,6 +492,8 @@ export default {
       dialogAddClass: false,
       addClassOne: false,
       classFlag: false,
+      schoolFlag: false,
+      schoolShow: false,
       addClassForm: {
         aside: 2,
         level: "",
@@ -631,9 +642,15 @@ export default {
   mounted() {
     // aaa
     this.auth()
+    let roleId = JSON.parse(localStorage.getItem('userInfo')).roleId
+    if (roleId == "superAdministrator") {
+      this.schoolShow = true
+    } else {
+      this.schoolShow = false
+    }
   },
   methods: {
-    ...mapMutations(["setGroupFlag", "setGradesFlag", "setPersonFlag", "setSomePdfFlag"]),
+    ...mapMutations(["setGroupFlag", "setGradesFlag", "setSchoolFlag", "setPersonFlag", "setSomePdfFlag"]),
     auth() {
       let that = this;
       let param = {
@@ -687,11 +704,6 @@ export default {
     },
     asideChange(val) {
       console.log(val)
-      if (val == 2) {
-        this.classFlag = true
-      } else {
-        this.classFlag = false
-      }
       this.addClassForm = {
         aside: val,
         level: "",
@@ -701,10 +713,23 @@ export default {
       this.checkAll = false;
       this.isIndeterminate = false;
       this.checkedList = []
-      this.addClassForm.level = this.levelList1[0].Pid
-      this.levleChange(this.levelList1[0].Pid);
-      this.addClassForm.grade = this.gradeList1[0].Pid
-      this.gradeChange(this.gradeList1[0].Pid)
+      if (val == 3) {
+        this.classFlag = false
+        this.schoolFlag = true
+      } else {
+        this.schoolFlag = false
+        if (val == 2) {
+          this.classFlag = true
+        } else {
+          this.classFlag = false
+        }
+        if (this.levelList1.length != 0) {
+          this.addClassForm.level = this.levelList1[0].Pid
+          this.levleChange(this.levelList1[0].Pid);
+          this.addClassForm.grade = this.gradeList1[0].Pid
+          this.gradeChange(this.gradeList1[0].Pid)
+        }
+      }
     },
     powerData() {
       let power = JSON.parse(localStorage.getItem("userAuth")).menuAuthID;
@@ -947,8 +972,10 @@ export default {
               console.log(levelArr);
               that.levelList = levelArr;
               that.levelList1 = levelArr;
-              that.addClassForm.level = that.levelList1[0].Pid;
-              that.levleChange(that.levelList1[0].Pid);
+              if (that.levelList.length != 0) {
+                that.addClassForm.level = that.levelList1[0].Pid;
+                that.levleChange(that.levelList1[0].Pid);
+              }
             }
           } else {
             that.$message.error(data.msg);
@@ -1594,17 +1621,33 @@ export default {
       console.log(this.addClassForm)
       console.log(this.levelList1)
       console.log(this.gradeList1)
-      this.addClassForm.level = this.levelList1[0].Pid
-      this.levleChange(this.levelList1[0].Pid);
-      this.addClassForm.grade = this.gradeList1[0].Pid
-      this.gradeChange(this.gradeList1[0].Pid)
-      console.log(this.classList1)
+      if (this.levelList1.length != 0) {
+        this.addClassForm.level = this.levelList1[0].Pid
+        this.levleChange(this.levelList1[0].Pid);
+        this.addClassForm.grade = this.gradeList1[0].Pid
+        this.gradeChange(this.gradeList1[0].Pid)
+        console.log(this.classList1)
+      }
       this.dialogAddClass = true
     },
     groupSub() {
       let that = this;
+
       console.log(that.addClassForm.aside)
-      if (that.addClassForm.aside == 1) {
+      if (that.addClassForm.aside == 3) {
+        console.log("校级的团体报告")
+        console.log(that.addClassForm)
+        this.groupList = {
+          aside: that.addClassForm.aside,
+          level: that.addClassForm.level,
+          grade: 12400,
+          class: {
+            gradeId: 12400,
+            gradeName: "初一"
+          }
+        }
+        this.setSchoolFlag(true);
+      } else if (that.addClassForm.aside == 1) {
         console.log("年级的团体报告")
         console.log(that.classList1)
         console.log(this.gradeList1)
@@ -1665,7 +1708,7 @@ export default {
         }
         console.log(this.groupList)
         this.setGradesFlag(true);
-      } else {
+      } else if (that.addClassForm.aside == 2) {
         console.log("班级的团体报告")
         this.addClassOne = false;
         if (this.checkedList.length == 0) {

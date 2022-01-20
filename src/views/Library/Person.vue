@@ -68,6 +68,7 @@
                 v-model="formPerson.email"
                 placeholder="请输入邮箱"
               ></el-input>
+              <el-input class="dis_none"></el-input>
               <div style="width:4rem;height:0.36rem"></div>
               <div class="tip_left" v-show="emailFlag">
                 <div class="tip_msg">
@@ -83,6 +84,7 @@
               修改密码
             </div>
             <el-form-item label="原密码：">
+              <el-input type="password" class="dis_none"></el-input>
               <el-input
                 type="password"
                 @change="oldChange"
@@ -257,21 +259,21 @@ export default {
         this.passportFlag = true;
         return false;
       }
-      if (this.formPerson.phone == "") {
-        console.log(2)
-        this.phoneFlag = true;
-        return false;
-      }
+      // if (this.formPerson.phone == "") {
+      //   console.log(2)
+      //   this.phoneFlag = true;
+      //   return false;
+      // }
       if (this.formPerson.phone != "" && !regp.test(this.formPerson.phone)) {
         this.phoneFlag = true;
         console.log(3)
         return false;
       }
-      if (this.formPerson.email == "") {
-        this.emailFlag = true;
-        console.log(4)
-        return false;
-      }
+      // if (this.formPerson.email == "") {
+      //   this.emailFlag = true;
+      //   console.log(4)
+      //   return false;
+      // }
       if (this.formPerson.email != "" && !rege.test(this.formPerson.email)) {
         this.emailFlag = true;
         console.log(5)
@@ -317,11 +319,13 @@ export default {
             localStorage.setItem("passport", that.formPerson.passport);
             // that.getUserInfo();
             if (param.newPassword != '') {
-              that.$message.success('修改成功，请重新登录！');
+              that.$message.success('修改成功，请重新登录');
               localStorage.clear()
               that.$router.replace({
                 path: "/login"
               });
+            } else {
+              that.$message.success('更新成功');
             }
           } else {
             that.$message.error(data.msg);
