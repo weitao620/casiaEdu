@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "compression-webpack-plugin": "^5.0.1",
     "core-js": "^2.6.5",
     "echarts": "^5.1.2",
     "element-ui": "^2.15.2",
