@@ -38,7 +38,7 @@
 
               <div class="per_msg">
                 <div class="per_msg_t">{{ detail.name }}</div>
-                <div class="per_msg_b">{{ detail.remark }}</div>
+                <div class="per_msg_b">{{ detail.roleName }}</div>
               </div>
               <div class="per_msg">
                 <div class="per_msg_t">上次登陆时间</div>
@@ -123,7 +123,6 @@
         </div>
         <div class="top_right">
           <div class="right_total">
-            
             <div class="total_t">
               <div class="total_txt">
                 <div class="t_txt1">
@@ -468,7 +467,7 @@ export default {
         name: "",
         gender: "1",
         participationNum: "",
-        remark: "",
+        roleName: "",
         warningFemale: "",
         warningMale: [],
         warningNum: "",
@@ -2293,6 +2292,9 @@ export default {
         .el-table__body {
           col:nth-child(6) {
             width: 2.4rem;
+          }
+          col:nth-child(3) {
+            width: 1.2rem;
           }
         }
         .el-table td {

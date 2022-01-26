@@ -9,7 +9,7 @@
           <el-breadcrumb-item>评估报告</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <div class="tab_box" v-if="!power3">
+      <div class="tab_box" v-show="!power3">
         <div
           v-if="power1"
           :class="['tab_btns tab_btns_l', { tab_act: tabActive == 0 }]"
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!power3">
+    <div v-show="!power3">
       <div class="search_form_box">
         <div class="search_title center_o_title">
           查询
@@ -432,7 +432,7 @@
       ></groupReport>
     </div>
     <!-- 年级 -->
-    <div style="height:;width:100%;overflow:hidden">
+    <div style="height:0;width:100%;overflow:hidden">
       <gradeReport
         :gList="groupList"
       ></gradeReport>
@@ -485,7 +485,7 @@ export default {
       power23: false,
       power24: false,
       power25: false,
-      power3: false,
+      power3: true,
 
       checkedList: [],
       class: [],
@@ -1638,13 +1638,13 @@ export default {
         console.log("校级的团体报告")
         console.log(that.addClassForm)
         this.groupList = {
-          aside: that.addClassForm.aside,
-          level: that.addClassForm.level,
-          grade: 12400,
-          class: {
-            gradeId: 12400,
-            gradeName: "初一"
-          }
+          aside: that.addClassForm.aside
+          // level: that.addClassForm.level,
+          // grade: 12400,
+          // class: {
+          //   gradeId: 12400,
+          //   gradeName: "初一"
+          // }
         }
         this.setSchoolFlag(true);
       } else if (that.addClassForm.aside == 1) {

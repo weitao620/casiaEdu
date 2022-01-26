@@ -106,7 +106,7 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" :selectable="checkSelectable"> </el-table-column>
-          <el-table-column prop="id" label="序号"> </el-table-column>
+          <el-table-column type="index" label="序号" :index="indexMethod"> </el-table-column>
           <el-table-column prop="name" label="姓名"> </el-table-column>
           <el-table-column prop="passport" label="登录账号">
           </el-table-column>
@@ -278,6 +278,10 @@ export default {
     this.getList(1);
   },
   methods: {
+    indexMethod(index) {
+      let that = this;
+      return index + 1 + that.limit * (this.currentPage - 1);
+    },
     checkSelectable(row) {
       return row.passport != 'administrator'
     },
@@ -408,6 +412,7 @@ export default {
     newChange(value) {
       var reg = /(?!.*\s)(?!^[\u4e00-\u9fa5]+$)(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,20}$/;
       var reg1 = value.length >= 6 && value.length <= 20;
+      // eslint-disable-next-line no-useless-escape
       var reg2 = /^[A-Za-z0-9`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]+$/.test(
         value
       );
@@ -455,6 +460,7 @@ export default {
       console.log(val);
       var value = this.passForm.newPass;
       var reg1 = value.length >= 6 && value.length <= 20;
+      // eslint-disable-next-line no-useless-escape
       var reg2 = /^[A-Za-z0-9`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]+$/.test(
         value
       );
