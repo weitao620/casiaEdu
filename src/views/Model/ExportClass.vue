@@ -589,7 +589,7 @@
             </ul>
           </div>
           <p class="gp_tipz" v-if="systemList[2].list1.length == 0">
-            【注】 数据来源为《 中国中小学生心理健康发展报告(2019) 》
+            【注】 数据来源为{{Suggestion.standard}}
           </p>
         </div>
       </div>
@@ -626,7 +626,7 @@
             </ul>
           </div>
           <p class="gp_tipz" v-if="index == systemList[2].list1.length - 1">
-            【注】 数据来源为《 中国中小学生心理健康发展报告(2019) 》
+            【注】 数据来源为{{Suggestion.standard}}
           </p>
         </div>
       </div>
