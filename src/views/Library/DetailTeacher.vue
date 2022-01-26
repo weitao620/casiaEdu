@@ -60,6 +60,7 @@
             <el-input
               v-model="formMsg.passport"
               placeholder="请输入登录账号"
+              :disabled="formMsg.passport == 'administrator'"
             ></el-input>
             <div style="width:4rem;height:0.36rem"></div>
             <div class="tip_left" v-show="passportFlag">

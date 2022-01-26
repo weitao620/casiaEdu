@@ -6,7 +6,7 @@
         class="group_p_01"
         :style="{ 'font-size': schoolName.length > 7 ? '32px' : '40px' }"
       >
-        {{ schoolName }} — {{ className }}年级
+        {{ schoolName }} — {{ gradeName }}年级
       </p>
       <div class="group_tips">
         <img src="../../assets/images/group/tip_group.png" alt="" />
@@ -32,7 +32,7 @@
           <div class="gp2l_body">
             <img src="../../assets/images/group/g_023.png" alt="" />
             <div class="gp2lb_txt">
-              <span>{{ schoolName }} · {{ className }}年级</span>
+              <span>{{ schoolName }} · {{ gradeName }}年级</span>
             </div>
           </div>
         </div>
@@ -287,7 +287,7 @@
               </span>
               <span class="wran_col1">{{ systemList[0].name }}风险</span>
               <span
-                >比例超过全国中小学生水平。老师需多关注本年级学生抑郁情况。</span
+                >比例超过全国中小学生水平。老师需多关注本年级学生{{ systemList[0].name }}情况。</span
               >
             </div>
           </div>
@@ -330,7 +330,7 @@
               </span>
               <span class="wran_col1">{{ systemList[1].name }}风险</span>
               <span
-                >比例超过全国中小学生水平。老师需多关注本年级学生抑郁情况。</span
+                >比例超过全国中小学生水平。老师需多关注本年级学生{{ systemList[1].name }}情况。</span
               >
             </div>
           </div>
@@ -373,7 +373,7 @@
               </span>
               <span class="wran_col1">{{ systemList[2].name }}风险</span>
               <span
-                >比例超过全国中小学生水平。老师需多关注本年级学生抑郁情况。</span
+                >比例超过全国中小学生水平。老师需多关注本年级学生{{ systemList[2].name }}情况。</span
               >
             </div>
           </div>
@@ -1273,7 +1273,7 @@ export default {
       Suggestion: {},
       UnconfidenceList: [],
       UnconfidenceList1: [],
-      className: "",
+      gradeName: "",
       schoolName: "",
       time: "",
       // 数据
@@ -2471,7 +2471,7 @@ export default {
           // } else {
           //   this.UnconfidenceList = [];
           // }
-          this.className = selectedData[i].className;
+          this.gradeName = selectedData[i].gradeName;
           this.schoolName = selectedData[i].schoolName;
           this.time = selectedData[i].time;
           console.log(selectedData[i]);
@@ -2480,7 +2480,7 @@ export default {
           console.log(htmlToZip)
           const p = await htmlToZip.getPdfs(
             this.$refs.sprintGroupPdf,
-            selectedData[i].schoolName + '-' + selectedData[i].className + '年级'
+            selectedData[i].schoolName + '-' + selectedData[i].gradeName + '年级'
           );
           promises.push(p);
         }

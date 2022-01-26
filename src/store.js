@@ -11,7 +11,8 @@ export default new Vuex.Store({
     isToken: false,
     collapseFlag: false,
     somePdfFlag: false,
-    gradesFlag: false
+    gradesFlag: false,
+    schoolFlag: false
   },
   mutations: {
     setUserName(state, data) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     setGradesFlag(state, data) {
       state.gradesFlag = data;
+    },
+    setSchoolFlag(state, data) {
+      state.schoolFlag = data;
     },
     setPersonFlag(state, data) {
       state.personFlag = data;
@@ -45,6 +49,9 @@ export default new Vuex.Store({
     },
     getGradesFlag(state) {
       return state.gradesFlag;
+    },
+    getSchoolFlag(state) {
+      return state.schoolFlag;
     },
     getPersonFlag(state) {
       return state.personFlag;

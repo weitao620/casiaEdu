@@ -99,7 +99,8 @@
             </ul>
           </el-checkbox-group>
           <div class="pm_btns">
-            <el-button type="primary" @click="onSubmit">保存</el-button>
+            <el-button v-if="this.powerDetail.roleID != 'superAdministrator'" type="primary" @click="onSubmit">保存</el-button>
+            <el-button v-else type="primary" style="background:#aaa" @click="onSubmit1">保存</el-button>
             <el-button type="primary" class="resets" @click="goBack"
               >取消</el-button
             >
@@ -147,8 +148,8 @@
               </div>
             </div>
           </el-checkbox-group>
-          <div class="pm_btns">
-            <el-button type="primary" @click="onSubmit">保存</el-button>
+          <div class="pm_btns"><el-button v-if="this.powerDetail.roleID != 'superAdministrator'" type="primary" @click="onSubmit">保存</el-button>
+            <el-button v-else type="primary" style="background:#aaa" @click="onSubmit1">保存</el-button>
             <el-button type="primary" class="resets" @click="goBack"
               >取消</el-button
             >
@@ -537,6 +538,9 @@ export default {
           }
         }, 100);
       }
+    },
+    onSubmit1() {
+      this.$message.warning(this.powerDetail.roleName + "不允许进行修改！");
     },
     onSubmit() {
       let that = this;
