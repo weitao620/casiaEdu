@@ -1772,7 +1772,7 @@ export default {
               }
               depArr.push(str);
             }
-            // console.log(depArr);
+            console.log(depArr);
             if (data.data.anxietyDim) {
               data.data.anxietyDim = data.data.anxietyDim.split("@@");
               // console.log(data.data.anxietyDim);
