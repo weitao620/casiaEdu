@@ -178,6 +178,13 @@
               v-model="formSearch.password"
               placeholder="默认为:登录账号后6位"
             ></el-input>
+            <div style="width:4rem;height:0.36rem"></div>
+            <div class="tip_left" v-show="passwordFlag">
+              <div class="tip_msg">
+                <img src="../../assets/images/x.png" alt="" />
+                输入密码最少6位
+              </div>
+            </div>
           </el-form-item>
           <el-form-item label="手机号码：">
             <el-input
@@ -464,7 +471,7 @@ export default {
     addSubmit() {
       let that = this;
       // console.log(this.levelList);
-      this.acountFlag = this.nameFlag = this.passwordFlag = this.phoneFlag = this.emailFlag = this.birthFlag = this.enterYearFlag = false;
+      this.acountFlag = this.nameFlag = this.passwordFlag = this.passportFlag = this.phoneFlag = this.emailFlag = this.birthFlag = this.enterYearFlag = false;
       var regp = /^1[3456789]\d{9}$/;
       var rege = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (this.formSearch.name == "") {
@@ -481,6 +488,10 @@ export default {
       }
       if (this.formSearch.passport == "" || this.formSearch.passport.length < 6) {
         this.passportFlag = true;
+        return false;
+      }
+      if (this.formSearch.password.length > 0 && this.formSearch.password.length < 6) {
+        this.passwordFlag = true;
         return false;
       }
       if (this.formSearch.phone != "" && !regp.test(this.formSearch.phone)) {
