@@ -14,9 +14,9 @@ module.exports = {
       '/api': {
         // 目标 API 地址
         // target: 'http://test.aidaka.wechat.app.waijiaoyi.com',
-        target: 'http://10.0.6.28:6120',
+        // target: 'http://10.0.6.28:6120',
         // target: "http://172.18.40.12",
-        // target: 'https://ipathy.net',
+        target: 'https://ipathy.net',
         // target: '182.92.212.173:7120',
         // 如果要代理 websockets
         ws: true,
