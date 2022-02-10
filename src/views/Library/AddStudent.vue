@@ -182,7 +182,7 @@
             <div class="tip_left" v-show="passwordFlag">
               <div class="tip_msg">
                 <img src="../../assets/images/x.png" alt="" />
-                输入密码最少6位
+                登录密码至少6位
               </div>
             </div>
           </el-form-item>
