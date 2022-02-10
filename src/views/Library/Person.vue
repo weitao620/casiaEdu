@@ -167,7 +167,6 @@ export default {
       power1: false,
       power2: false,
       power3: false,
-      
       passportFlag: false,
       phoneFlag: false,
       emailFlag: false,
@@ -363,6 +362,7 @@ export default {
     newChange(value) {
       var reg = /(?!.*\s)(?!^[\u4e00-\u9fa5]+$)(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,20}$/;
       var reg1 = value.length >= 6 && value.length <= 20;
+      // eslint-disable-next-line no-useless-escape
       var reg2 = /^[A-Za-z0-9`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]+$/.test(
         value
       );
@@ -410,6 +410,7 @@ export default {
       console.log(val);
       var value = this.formPerson.newPass;
       var reg1 = value.length >= 6 && value.length <= 20;
+      // eslint-disable-next-line no-useless-escape
       var reg2 = /^[A-Za-z0-9`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]+$/.test(
         value
       );
