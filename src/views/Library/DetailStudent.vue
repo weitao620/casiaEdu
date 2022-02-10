@@ -180,6 +180,13 @@
               v-model="formSearch.password"
               placeholder="默认为:登录账号后6位"
             ></el-input>
+            <div style="width:4rem;height:0.36rem"></div>
+            <div class="tip_left" v-show="passwordFlag">
+              <div class="tip_msg">
+                <img src="../../assets/images/x.png" alt="" />
+                登录密码至少6位
+              </div>
+            </div>
           </el-form-item>
           <el-form-item label="手机号码：">
             <el-input
@@ -589,6 +596,10 @@ export default {
       }
       if (this.formSearch.passport == "" || this.formSearch.passport.length < 6) {
         this.passportFlag = true;
+        return false;
+      }
+      if (this.formSearch.password.length > 0 && this.formSearch.password.length < 6) {
+        this.passwordFlag = true;
         return false;
       }
       if (this.formSearch.phone != "" && !regp.test(this.formSearch.phone)) {

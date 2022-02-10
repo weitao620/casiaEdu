@@ -78,6 +78,13 @@
               v-model="formMsg.password"
               placeholder="默认为:登录账号后6位"
             ></el-input>
+            <div style="width:4rem;height:0.36rem"></div>
+            <div class="tip_left" v-show="passwordFlag">
+              <div class="tip_msg">
+                <img src="../../assets/images/x.png" alt="" />
+                登录密码至少6位
+              </div>
+            </div>
           </el-form-item>
           <el-form-item required label="教师性别：">
             <el-radio-group v-model="formMsg.gender">
@@ -340,6 +347,10 @@ export default {
         this.nameFlag = true;
         return false;
       }
+      if (this.formMsg.password != "" && this.formMsg.password.length < 6) {
+        this.passwordFlag = true;
+        return false;
+      }
       if (this.formMsg.phone != "" && !regp.test(this.formMsg.phone)) {
         this.phoneFlag = true;
         return false;
@@ -348,8 +359,14 @@ export default {
         this.emailFlag = true;
         return false;
       }
+      if (this.formMsg.password == "") {
+        this.formMsg.password = this.formMsg.passport.substring(
+          this.formMsg.passport.length - 6
+        );
+      }
+
       this.formMsg.headIcon = this.formMsg.headIcon.split('base64,')[1]
-      // console.log(this.formMsg);
+      console.log(this.formMsg);
       that.$http
         .post(Url + "/aimw/teacher/addUser", this.formMsg)
         .then(res => {

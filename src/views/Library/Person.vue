@@ -131,6 +131,7 @@
             <el-form-item label="确认密码：">
               <el-input
                 type="password"
+                @input="twoChange"
                 @blur="twoChange"
                 v-model="formPerson.twoPass"
                 placeholder="请再次输入新密码"
@@ -251,6 +252,7 @@ export default {
     // 提交个人信息
     onSubmit() {
       let that = this;
+      // that.phoneFlag = that.emailFlag = that.newPassFlag = that.oldPassFlag = this.twoPassFlag = false
       console.log(this.formPerson);
       var regp = /^1[3456789]\d{9}$/;
       var rege = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
@@ -259,26 +261,21 @@ export default {
         this.passportFlag = true;
         return false;
       }
-      // if (this.formPerson.phone == "") {
-      //   console.log(2)
-      //   this.phoneFlag = true;
-      //   return false;
-      // }
       if (this.formPerson.phone != "" && !regp.test(this.formPerson.phone)) {
         this.phoneFlag = true;
         console.log(3)
         return false;
       }
-      // if (this.formPerson.email == "") {
-      //   this.emailFlag = true;
-      //   console.log(4)
-      //   return false;
-      // }
       if (this.formPerson.email != "" && !rege.test(this.formPerson.email)) {
         this.emailFlag = true;
         console.log(5)
         return false;
       }
+      // if (!this.oldRight) {
+      //   this.oldPassFlag = true;
+      //   console.log(55)
+      //   return false;
+      // }
       if (!((that.formPerson.oldPass != "" && that.formPerson.newPass != "" && that.formPerson.twoPass != "" && (that.oldRight || !that.oldPassFlag) && that.oldRight && !that.newPassFlag && !that.twoPassFlag) || (that.formPerson.oldPass == "" && that.formPerson.newPass == "" && that.formPerson.twoPass == ""))) {
         console.log(6)
         if (that.formPerson.oldPass == "") {
@@ -431,6 +428,8 @@ export default {
     },
     oldChange(val) {
       console.log(val);
+      console.log(this.password)
+      console.log(val == this.password)
       this.formPerson.oldPass = val;
       if (val == this.password) {
         this.oldPassFlag = true;
