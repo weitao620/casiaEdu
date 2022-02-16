@@ -14,7 +14,7 @@
           <div class="left_wel">
             <div class="welcome">
               <div class="w_txt1">欢迎回来！</div>
-              <div class="w_txt2">小小世界 Mini World</div>
+              <div class="w_txt2">AI心世界&nbsp;&nbsp;AI Mental World</div>
             </div>
             <div class="person" v-if="detail.name">
               <img
