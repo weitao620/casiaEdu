@@ -290,7 +290,9 @@ export default {
             that.formSchool.district = areaArr[2];
             that.formSchool.type = data.type;
             that.formSchool.website = data.website;
-            that.formSchool.headIcon = 'data:image;base64,' + data.headIcon;
+            if (data.headIcon && data.headIcon != '') {
+              that.formSchool.headIcon = 'data:image;base64,' + data.headIcon;
+            }
             console.log(that.formSchool);
           }
         })
