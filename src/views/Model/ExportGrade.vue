@@ -64,7 +64,7 @@
           <div class="gp2l_body">
             <img src="../../assets/images/group/g_027.png" alt="" />
             <div class="gp2lb_txt">
-              <span>智能心理沙盘</span>
+              <span>智能心理箱庭</span>
             </div>
           </div>
         </div>

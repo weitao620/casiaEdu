@@ -535,28 +535,6 @@ export default {
         .catch(res => {
           console.log(res);
         });
-      // var data = JSON.parse(localStorage.getItem("studyDetail"));
-      // console.log(data);
-      // that.formSearch = {
-      //   level: data.section,
-      //   grade: data.grade,
-      //   class: data.class,
-      //   sectionName: data.sectionName,
-      //   gradeName: data.gradeName,
-      //   className: data.className,
-      //   name: data.name,
-      //   gender: data.gender,
-      //   birth: data.birth,
-      //   enterYear: data.enterYear,
-      //   passport: data.passport,
-      //   acount: data.acount,
-      //   password: data.password,
-      //   phone: data.phone,
-      //   email: data.email,
-      //   birthPlace: data.birth_place,
-      //   remark: data.remark,
-      //   headIcon: 'data:image;base64,' + data.headIcon
-      // };
     },
     userChange(val) {
       if (val != "") {

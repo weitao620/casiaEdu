@@ -13,7 +13,7 @@
         @click="toReview"
       >
         <img src="../../assets/images/report/part0.png" alt="" />
-        <span>查看沙盘作品</span>
+        <span>查看箱庭作品</span>
       </div>
       <div style="box-shadow: 0px 13px 43px 0px rgba(70, 101, 135, 0.1);">
         <div

@@ -13,7 +13,7 @@
         @click="toReview"
       >
         <img src="../../assets/images/report/part0.png" alt="" />
-        <span>查看沙盘作品</span>
+        <span>查看箱庭作品</span>
       </div>
       <div style="box-shadow: 0px 13px 43px 0px rgba(70, 101, 135, 0.1);">
         <div
@@ -216,7 +216,7 @@
               style="width:0.35rem;height:0.34rem"
               alt=""
             />
-            <span>沙盘鸟瞰图</span>
+            <span>箱庭鸟瞰图</span>
           </div>
           <div class="dtmcl_pic" v-if="details.birdView" @click="birdView">
             <img :src="'data:image;base64,' + details.birdView" alt="" />
@@ -232,7 +232,7 @@
               style="width:0.28rem;height:0.30rem"
               alt=""
             />
-            <span>沙盘解析</span>
+            <span>箱庭解析</span>
           </div>
           <div class="dtmcr_bts1">
             <p>
@@ -1014,7 +1014,7 @@
     <el-dialog
       class="fix_pass"
       :close-on-click-modal="false"
-      title="沙盘鸟瞰图"
+      title="箱庭鸟瞰图"
       :visible.sync="birdFlag"
     >
       <img

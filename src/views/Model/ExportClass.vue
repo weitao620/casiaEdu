@@ -66,7 +66,7 @@
           <div class="gp2l_body">
             <img src="../../assets/images/group/g_027.png" alt="" />
             <div class="gp2lb_txt">
-              <span>智能心理沙盘</span>
+              <span>智能心理箱庭</span>
               <!-- <span class="gp3lb_num">39名(91%)</span>
               <span>学生的结果可信，</span>
               <span class="gp3lb_num">4名(9%)</span>
