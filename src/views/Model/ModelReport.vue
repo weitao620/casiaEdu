@@ -58,7 +58,7 @@
                 alt=""
               />
               <span class="dt_blod">学&nbsp;&nbsp;籍&nbsp;号：</span>
-              <span style="flex:1;word-break:break-all">{{details.passport}}999999999999999999</span>
+              <span style="flex:1;word-break:break-all">{{details.passport}}</span>
             </li>
             <li>
               <img
