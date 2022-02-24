@@ -126,7 +126,7 @@
         </div>
         <div class="dtp_main">
           <ul>
-            <li style="width:2.4rem">
+            <li style="width:2.2rem">
               <img
                 class="dt_per1"
                 src="../../assets/images/report/person1.png"
@@ -135,14 +135,14 @@
               <span class="dt_blod">姓名：</span>
               <span>{{ details.name }}</span>
             </li>
-            <li style="width:2.4rem">
+            <li style="width:2.6rem;display:flex">
               <img
                 class="dt_per2"
                 src="../../assets/images/report/person2.png"
                 alt=""
               />
               <span class="dt_blod">学籍号：</span>
-              <span>{{ details.passport }}</span>
+              <span style="flex:1;word-break:break-all;">{{ details.passport }}</span>
             </li>
             <li style="width:3rem">
               <img
@@ -173,7 +173,7 @@
             </li>
           </ul>
           <ul>
-            <li style="width:2.4rem">
+            <li style="width:2.2rem">
               <img
                 class="dt_per6"
                 src="../../assets/images/report/person6.png"
@@ -182,14 +182,14 @@
               <span class="dt_blod"></span>
               <span>{{ details.className }}</span>
             </li>
-            <li style="width:2.4rem">
+            <li style="width:2.6rem;display:flex">
               <img
                 class="dt_per7"
                 src="../../assets/images/report/person7.png"
                 alt=""
               />
               <span class="dt_blod">测评次数：</span>
-              <span>第{{ details.evaluationTime }}次</span>
+              <span style="flex:1;word-break:break-all;">第{{ details.evaluationTime }}次</span>
             </li>
             <li style="width:5.4rem">
               <img

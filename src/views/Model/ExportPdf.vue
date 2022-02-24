@@ -51,14 +51,14 @@
                 <img src="../../assets/images/woman.png" alt=""> 女
               </div>
             </li>
-            <li>
+            <li style="display:flex">
               <img
                 class="dt_per5"
                 src="../../assets/images/report/person3.png"
                 alt=""
               />
               <span class="dt_blod">学&nbsp;&nbsp;籍&nbsp;号：</span>
-              <span>{{details.passport}}</span>
+              <span style="flex:1;word-break:break-all">{{details.passport}}</span>
             </li>
             <li>
               <img
