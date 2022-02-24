@@ -525,24 +525,20 @@ export default {
         .then(res => {
           let data = res.data;
           if (data.code == 0) {
-            if (data.data.actionInfoRet.actionInfo == null) {
-              data.data.actionInfoRet.actionInfo = []
+            if (data.data.actionInfoRet == 'null') {
+              data.data.actionInfoRet = '[]';
             }
-            fuluList = data.data.actionInfoRet.actionInfo;
-            // console.log(fuluList)
+            console.log(data.data.actionInfoRet)
+            fuluList = JSON.parse(data.data.actionInfoRet);
             that.total = fuluList.length;
-            that.actionInfo = this.pagination(page, this.limit, fuluList)
-            that.pageNum = Math.ceil(fuluList.length / that.limit)
+            that.actionInfo = this.pagination(1, this.limit, fuluList);
+            that.pageNum = fuluList.length == 0 ? 1 : Math.ceil(fuluList.length / that.limit);
             if (data.data.sandInfoRet.sandInfo) {
               that.sandInfo = data.data.sandInfoRet.sandInfo;
             } else {
-              that.sandInfo = []
+              that.sandInfo = [];
             }
-            // console.log(fuluList)
-            // console.log(that.sandInfo)
-            // data.data.birth = data.data.birth.split(" ")[0];
-            // that.details = data.data
-            that.part11 = true
+            this.part11 = true;
             setTimeout(() => {
               that.myTxtFlag = true;
             }, 500);

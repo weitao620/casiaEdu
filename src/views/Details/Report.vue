@@ -977,11 +977,14 @@
       </div>
       <template>
         <el-table border :data="actionInfo">
-          <el-table-column prop="actionId" label="操作序号"> </el-table-column>
-          <el-table-column prop="time" label="操作时间"> </el-table-column>
-          <el-table-column prop="name" label="沙具名称"> </el-table-column>
-          <el-table-column prop="type" label="沙具类别"> </el-table-column>
-          <el-table-column prop="operation" label="操作内容">
+          <el-table-column prop="action_idx" label="操作序号"> </el-table-column>
+          <el-table-column prop="action_time" label="操作时间"> </el-table-column>
+          <el-table-column prop="bodies_name" label="沙具名称"> </el-table-column>
+          <el-table-column prop="bodies_type" label="沙具类别"> </el-table-column>
+          <el-table-column prop="action_content" label="操作内容">
+            <template slot-scope="scope">
+              <span style="color:#006CFF">{{scope.row.action_content}}</span>
+            </template>
           </el-table-column>
         </el-table>
       </template>
@@ -1323,28 +1326,24 @@ export default {
         .then(res => {
           let data = res.data;
           if (data.code == 0) {
-            if (data.data.actionInfoRet.actionInfo == null) {
-              data.data.actionInfoRet.actionInfo = []
+            if (data.data.actionInfoRet == 'null') {
+              data.data.actionInfoRet = '[]';
             }
-            fuluList = data.data.actionInfoRet.actionInfo;
-            // console.log(fuluList)
+            console.log(data.data.actionInfoRet)
+            fuluList = JSON.parse(data.data.actionInfoRet);
             that.total = fuluList.length;
-            // console.log(that.total)
-            that.actionInfo = this.pagination(1, this.limit, fuluList)
-            that.pageNum = Math.ceil(fuluList.length / that.limit)
+            that.actionInfo = this.pagination(1, this.limit, fuluList);
+            console.log(fuluList)
+            that.pageNum = fuluList.length == 0 ? 1 : Math.ceil(fuluList.length / that.limit);
             if (data.data.sandInfoRet.sandInfo) {
               that.sandInfo = data.data.sandInfoRet.sandInfo;
             } else {
               that.sandInfo = [];
             }
-            // console.log(that.sandInfo);
-            // data.data.birth = data.data.birth.split(" ")[0];
-            // that.details = data.data
             this.part11 = true;
             setTimeout(() => {
               that.myTxtFlag = true;
             }, 500);
-            // console.log(data);
           } else {
             that.$message.error(data.msg);
           }
