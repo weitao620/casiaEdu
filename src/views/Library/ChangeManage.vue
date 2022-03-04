@@ -64,6 +64,10 @@
               <el-date-picker
                 v-model="formSearch.time"
                 type="daterange"
+                ref="datePick3"
+                :clearable="false"
+                :picker-options="dateButton3"
+                @change="changeTime3"
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
@@ -302,7 +306,30 @@ import Url from "@/assets/js/url.js";
 export default {
   name: "report",
   data() {
+    var that = this
     return {
+      dateButton3: {
+        time3: '',
+        shortcuts: [
+          {
+            text: "清空",
+            onClick(picker) {
+              console.log(3)
+              that.time3 = ''
+              that.formSearch.time = ''
+              that.$refs.datePick3.handleClose();
+              // picker.$emit('pick', ['', '']);
+            }
+          },
+          {
+            text: "确定",
+            onClick() {
+              that.$refs.datePick3.handleClose();
+              // 通过$ref设置 点击确定时，关闭日期选择的弹窗
+            }
+          }
+        ]
+      },
       reloadTree: false,
       statusFlag: true,
       studyFlag: true,
@@ -416,6 +443,15 @@ export default {
     this.openYearInit();
   },
   methods: {
+    // 当日期改变时触发
+    changeTime3(e) {
+      console.log(e)
+      // 保证在选择完时间后，日期弹出框不会消失
+      if (e != '') {
+        this.$refs.datePick3.focus();
+      }
+      this.time3 = e;
+    },
     studyDel(data, index) {
       console.log(data);
       this.studyList.splice(index, 1);

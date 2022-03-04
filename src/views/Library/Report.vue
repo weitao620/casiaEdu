@@ -94,6 +94,10 @@
             <el-date-picker
               v-model="formSearch.time"
               type="daterange"
+              ref="datePick1"
+              :clearable="false"
+              :picker-options="dateButton1"
+              @change="changeTime1"
               range-separator="~"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
@@ -133,6 +137,10 @@
             <el-date-picker
               v-model="formSearchYou.time"
               type="daterange"
+              ref="datePick2"
+              :clearable="false"
+              :picker-options="dateButton2"
+              @change="changeTime2"
               range-separator="~"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
@@ -432,7 +440,7 @@
       ></groupReport>
     </div>
     <!-- 年级 -->
-    <div style="height:0;width:100%;overflow:hidden">
+    <div class="grade" style="height:0;width:100%;overflow:hidden">
       <gradeReport
         :gList="groupList"
       ></gradeReport>
@@ -465,7 +473,51 @@ export default {
     schoolReport
   },
   data() {
+    var that = this;
     return {
+      dateButton1: {
+        time1: '',
+        shortcuts: [
+          {
+            text: "清空",
+            onClick(picker) {
+              console.log(1)
+              that.time1 = ''
+              that.formSearch.time = ''
+              that.$refs.datePick1.handleClose();
+              // picker.$emit('pick', ['', '']);
+            }
+          },
+          {
+            text: "确定",
+            onClick() {
+              that.$refs.datePick1.handleClose();
+              // 通过$ref设置 点击确定时，关闭日期选择的弹窗
+            }
+          }
+        ]
+      },
+      dateButton2: {
+        time2: '',
+        shortcuts: [
+          {
+            text: "清空",
+            onClick() {
+              console.log(2)
+              that.time2 = ''
+              that.formSearchYou.time = ''
+              that.$refs.datePick2.handleClose();
+            }
+          },
+          {
+            text: "确定",
+            onClick() {
+              that.$refs.datePick2.handleClose();
+              // 通过$ref设置 点击确定时，关闭日期选择的弹窗
+            }
+          }
+        ]
+      },
       schoolOrg1: [],
       checkAll: false,
       isIndeterminate: false,
@@ -651,6 +703,24 @@ export default {
   },
   methods: {
     ...mapMutations(["setGroupFlag", "setGradesFlag", "setSchoolFlag", "setPersonFlag", "setSomePdfFlag"]),
+    // 当日期改变时触发
+    changeTime1(e) {
+      console.log(e)
+      // 保证在选择完时间后，日期弹出框不会消失
+      if (e != '') {
+        this.$refs.datePick1.focus();
+      }
+      this.time1 = e;
+    },
+    // 当日期改变时触发
+    changeTime2(e) {
+      console.log(e)
+      // 保证在选择完时间后，日期弹出框不会消失
+      if (e != '') {
+        this.$refs.datePick2.focus();
+      }
+      this.time2 = e;
+    },
     auth() {
       let that = this;
       let param = {
@@ -992,6 +1062,7 @@ export default {
       let star = "";
       let end = "";
       this.currentPage = page;
+      console.log(that.formSearch)
       if (that.tabActive == 0) {
         if (that.formSearch.time != "" && that.formSearch.time) {
           star =
@@ -1907,6 +1978,7 @@ export default {
       this.$router.push({ name: "login" });
     },
     formTimes(date) {
+      console.log(date)
       var y = date.getFullYear();
       var m = date.getMonth() + 1;
       m = m < 10 ? "0" + m : m;

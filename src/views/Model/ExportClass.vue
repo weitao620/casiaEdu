@@ -713,7 +713,7 @@
                 <div>姓名</div>
                 <div>学籍号</div>
                 <div>班级</div>
-                <div style="flex:2">预警类型</div>
+                <div>预警类型</div>
                 <div>测试日期</div>
               </li>
               <li
@@ -731,7 +731,7 @@
                 <div>{{ item.name }}</div>
                 <div>{{ item.passport }}</div>
                 <div>{{ item.className }}</div>
-                <div style="flex:2" v-html="item.level1"></div>
+                <div v-html="item.level1"></div>
                 <div>{{ item.datetime }}</div>
               </li>
             </ul>
@@ -761,7 +761,7 @@
                 <div>姓名</div>
                 <div>学籍号</div>
                 <div>班级</div>
-                <div style="flex:2">预警类型</div>
+                <div>预警类型</div>
                 <div>测试日期</div>
               </li>
               <li
@@ -779,7 +779,7 @@
                 <div>{{ item.name }}</div>
                 <div>{{ item.passport }}</div>
                 <div>{{ item.className }}</div>
-                <div style="flex:2" v-html="item.level2"></div>
+                <div v-html="item.level2"></div>
                 <div>{{ item.datetime }}</div>
               </li>
             </ul>
@@ -813,7 +813,7 @@
                 <div>{{ itemc.name }}</div>
                 <div>{{ itemc.passport }}</div>
                 <div>{{ itemc.className }}</div>
-                <div style="flex:2" v-html="itemc.level1"></div>
+                <div v-html="itemc.level1"></div>
                 <div>{{ itemc.datetime }}</div>
               </li>
             </ul>
@@ -847,7 +847,7 @@
                 <div>姓名</div>
                 <div>学籍号</div>
                 <div>班级</div>
-                <div style="flex:2">预警类型</div>
+                <div>预警类型</div>
                 <div>测试日期</div>
               </li>
               <li
@@ -865,7 +865,7 @@
                 <div>{{ item.name }}</div>
                 <div>{{ item.passport }}</div>
                 <div>{{ item.className }}</div>
-                <div style="flex:2" v-html="item.level2"></div>
+                <div v-html="item.level2"></div>
                 <div>{{ item.datetime }}</div>
               </li>
             </ul>
@@ -899,7 +899,7 @@
                 <div>{{ itemc.name }}</div>
                 <div>{{ itemc.passport }}</div>
                 <div>{{ itemc.className }}</div>
-                <div style="flex:2" v-html="itemc.level2"></div>
+                <div v-html="itemc.level2"></div>
                 <div>{{ itemc.datetime }}</div>
               </li>
             </ul>
@@ -3572,11 +3572,11 @@ export default {
           }
           div:nth-child(1) {
             flex: none;
-            width: 90px;
+            width: 70px;
           }
           div:nth-child(2) {
             flex: none;
-            width: 130px;
+            width: 120px;
           }
           // div:nth-child(3){
           //  flex: none;
@@ -3584,7 +3584,7 @@ export default {
           // }
           div:nth-child(4) {
             flex: none;
-            width: 140px;
+            width: 120px;
           }
           div:nth-child(6) {
             flex: none;
