@@ -21,8 +21,8 @@ export default {
     if (winout > winin) {
       abs = (winout - winin) / 2// 获得滚动条宽度的一半
     }
-    canvas.width = eleW * 2// 将画布宽&&高放大两倍
-    canvas.height = eleH * 2
+    canvas.width = eleW * 1.5// 将画布宽&&高放大两倍
+    canvas.height = eleH * 1.5
     var context = canvas.getContext("2d")
     context.scale(1.5, 1.5) // 增强图片清晰度
     context.translate(0, -eleOffsetTop)
@@ -31,10 +31,13 @@ export default {
       setTimeout(() => {
         // 这句挺重要
         html2Canvas(el, {
-          scale: 1.1,
+          scale: 0.8,
           dpi: 300,
           useCORS: true,
-          imageTimeout: 0
+          imageTimeout: 0,
+          allowTaint: false,
+          backgroundColor: null,
+          logging: true
         })
           .then((canvas) => {
             var contentWidth = canvas.width

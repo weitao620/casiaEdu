@@ -1633,7 +1633,6 @@ export default {
         const zip = new JSZip();
         const promises = [];
         this.isShowPdf = true;
-
         for (let i = 0; i < selectedData.length; i++) {
           // 解析数据
           console.log(selectedData[i]);
