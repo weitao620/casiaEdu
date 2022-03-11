@@ -15,9 +15,9 @@ module.exports = {
         // 目标 API 地址
         // target: 'http://10.0.6.28:6120',
         // target: "http://172.18.40.12",
-        // target: 'https://ipathy.net',
+        target: 'https://ipathy.net',
         // target: '182.92.212.173:7120',
-        target: 'http://120.25.236.3:8120',
+        // target: 'http://120.25.236.3:8120',
         // 如果要代理 websockets
         ws: true,
         // 将主机标头的原点更改为目标URL
