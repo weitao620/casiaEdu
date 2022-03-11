@@ -52,7 +52,6 @@ export default {
     },
     auth() {
       let that = this;
-      console.log(this.$route.name)
       if (this.$route.name == 'login') {
         return false
       }
@@ -72,7 +71,6 @@ export default {
               data.data.userAuth = JSON.stringify(obja)
             } else {
               if (JSON.parse(data.data.userAuth).menuAuthID) {
-                console.log('11')
               } else {
                 let nOb = JSON.parse(data.data.userAuth)
                 nOb.menuAuthID = []
@@ -92,8 +90,6 @@ export default {
     ...mapMutations(["setUserName"])
   },
   mounted() {
-    console.log("单页面数据刷新")
-    // console.log(this.$router)
     var user = sessionStorage.getItem("userName");
     if (user) {
       this.setUserName(user);
