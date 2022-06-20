@@ -36,7 +36,7 @@ axios.interceptors.request.use(
     //   }
     // }
     if (res.url.indexOf("/user/getUserProfile") != -1 || res.url.indexOf("/index/listLatestReportsUserIcon") != -1 || res.url.indexOf("/report/exportGradeReport") != -1 || res.url.indexOf("/report/exportClassReport") != -1 || res.url.indexOf("/report/reportReviewImgs") != -1 || res.url.indexOf("/report/reportBirdView") != -1 || res.url.indexOf("/report/appendix") != -1 || res.url.indexOf("/report/reportReview") != -1 || res.url.indexOf("/report/reportInfo") != -1) {
-      console.log('request不管')
+      console.log('request不管？')
     } else {
       console.log('request管')
       // res.hesders = { "Content-Type": "application/x-www-form-urlencoded" }

@@ -222,7 +222,6 @@
             />
             <span>箱庭鸟瞰图</span>
           </div>
-          {{ details.birdView }}
           <div class="dtmcl_pic" v-if="details.birdView" @click="birdView">
             <img :src="'data:image;base64,' + details.birdView" alt="" />
           </div>
