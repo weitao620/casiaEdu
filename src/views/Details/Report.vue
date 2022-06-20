@@ -142,7 +142,9 @@
                 alt=""
               />
               <span class="dt_blod">学籍号：</span>
-              <span style="flex:1;word-break:break-all;">{{ details.passport }}</span>
+              <span style="flex:1;word-break:break-all;">{{
+                details.passport
+              }}</span>
             </li>
             <li style="width:3rem">
               <img
@@ -189,7 +191,9 @@
                 alt=""
               />
               <span class="dt_blod">测评次数：</span>
-              <span style="flex:1;word-break:break-all;">第{{ details.evaluationTime }}次</span>
+              <span style="flex:1;word-break:break-all;"
+                >第{{ details.evaluationTime }}次</span
+              >
             </li>
             <li style="width:5.4rem">
               <img
@@ -204,7 +208,7 @@
         </div>
       </div>
     </div>
-    <div class="dt_mains"  v-show="!reviewFlag">
+    <div class="dt_mains" v-show="!reviewFlag">
       <div class="dtm_title" ref="parts4">
         作品解读
       </div>
@@ -218,6 +222,7 @@
             />
             <span>箱庭鸟瞰图</span>
           </div>
+          {{ details.birdView }}
           <div class="dtmcl_pic" v-if="details.birdView" @click="birdView">
             <img :src="'data:image;base64,' + details.birdView" alt="" />
           </div>
@@ -278,7 +283,10 @@
               <span>风险评估</span>
             </div>
             <div v-if="details.reportWarningInfo">
-              <div style="padding: 0 0.24rem" v-if="details.warningList.length == 0">
+              <div
+                style="padding: 0 0.24rem"
+                v-if="details.warningList.length == 0"
+              >
                 该生心理健康水平良好。
               </div>
               <div v-else>
@@ -642,7 +650,9 @@
               <div class="dtmsb_tle" :style="{ background: item.bg }">
                 <h3>{{ item.title }}</h3>
                 <div class="dtt_res">
-                  <span style="font-size:0.18rem;margin-top:0.48rem">评估结果</span>
+                  <span style="font-size:0.18rem;margin-top:0.48rem"
+                    >评估结果</span
+                  >
                   <div class="dtt_img">
                     <img
                       src="../../assets/images/report/grade_line.png"
@@ -663,9 +673,7 @@
               <div class="dtmsb_tar">
                 <div v-if="index == 0" style="position:relative">
                   <div class="top_top" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[0].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[0].name }}</span>
                     <div class="demsb_tool">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -680,9 +688,7 @@
                     </div>
                   </div>
                   <div class="bottom_left" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[2].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[2].name }}</span>
                     <div class="demsb_tool" style="margin-left:1.6rem">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -692,9 +698,7 @@
                     </div>
                   </div>
                   <div class="bottom_right" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[1].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[1].name }}</span>
                     <div class="demsb_tool1">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -711,9 +715,7 @@
                 </div>
                 <div v-if="index == 1" style="position:relative">
                   <div class="top_top" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[0].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[0].name }}</span>
                     <div class="demsb_tool">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -723,9 +725,7 @@
                     </div>
                   </div>
                   <div class="bottom_left" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[2].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[2].name }}</span>
                     <div class="demsb_tool" style="margin-left:1.6rem">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -735,9 +735,7 @@
                     </div>
                   </div>
                   <div class="bottom_right" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[1].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[1].name }}</span>
                     <div class="demsb_tool1">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -754,9 +752,7 @@
                 </div>
                 <div v-if="index == 2" style="position:relative">
                   <div class="top_top" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[0].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[0].name }}</span>
                     <div class="demsb_tool">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -766,9 +762,7 @@
                     </div>
                   </div>
                   <div class="bottom_left" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[2].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[2].name }}</span>
                     <div class="demsb_tool" style="margin-left:1.6rem">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -778,9 +772,7 @@
                     </div>
                   </div>
                   <div class="bottom_right" v-if="item.subDim">
-                    <span class="tt_txt">{{
-                      item.subDim[1].name
-                    }}</span>
+                    <span class="tt_txt">{{ item.subDim[1].name }}</span>
                     <div class="demsb_tool1">
                       <div class="demsb_score">
                         学生得分：<span>{{
@@ -902,12 +894,8 @@
         >
           <el-carousel-item v-for="item in imgList" :key="item.name">
             <div class="dtm_img_box">
-              <img
-                class="dtmi_img"
-                :src="item.img"
-                alt=""
-              />
-              <div class="dtmi_txt">{{item.name}}</div>
+              <img class="dtmi_img" :src="item.img" alt="" />
+              <div class="dtmi_txt">{{ item.name }}</div>
             </div>
           </el-carousel-item>
         </el-carousel>
@@ -918,27 +906,36 @@
       <div class="dtm_xls" v-if="reviewData.workInfo">
         <div class="dtmx_li">
           <div class="dtmxl_head">作品名称</div>
-          <div class="dtmxl_body">{{reviewData.workInfo.workName}}</div>
+          <div class="dtmxl_body">{{ reviewData.workInfo.workName }}</div>
           <div class="dtmxl_head">自我像</div>
-          <div class="dtmxl_body">{{reviewData.workInfo.representSand}}</div>
+          <div class="dtmxl_body">{{ reviewData.workInfo.representSand }}</div>
         </div>
         <div class="dtmx_li">
           <div class="dtmxl_head">最重要的沙具</div>
-          <div class="dtmxl_body">{{reviewData.workInfo.importantSand}}</div>
+          <div class="dtmxl_body">{{ reviewData.workInfo.importantSand }}</div>
           <div class="dtmxl_head">制作次数</div>
-          <div class="dtmxl_body">第<span>{{reviewData.workInfo.time}}</span>次</div>
+          <div class="dtmxl_body">
+            第<span>{{ reviewData.workInfo.time }}</span
+            >次
+          </div>
         </div>
         <div class="dtmx_li">
           <div class="dtmxl_head">满意程度</div>
-          <div class="dtmxl_body"><span>{{reviewData.workInfo.satisfaction}}</span>分</div>
+          <div class="dtmxl_body">
+            <span>{{ reviewData.workInfo.satisfaction }}</span
+            >分
+          </div>
           <div class="dtmxl_head">制作用时</div>
-          <div class="dtmxl_body">{{reviewData.workInfo.operationTime}}</div>
+          <div class="dtmxl_body">{{ reviewData.workInfo.operationTime }}</div>
         </div>
         <div class="dtmx_li">
           <div class="dtmxl_head">作品场景</div>
-          <div class="dtmxl_body">{{reviewData.workInfo.scene}}</div>
+          <div class="dtmxl_body">{{ reviewData.workInfo.scene }}</div>
           <div class="dtmxl_head">沙具删除比例</div>
-          <div class="dtmxl_body"><span>{{reviewData.workInfo.deleteScale}}</span>%</div>
+          <div class="dtmxl_body">
+            <span>{{ reviewData.workInfo.deleteScale }}</span
+            >%
+          </div>
         </div>
 
         <div class="dtmx_li dtmx_lis" v-if="reviewData.workInfo.themeInfo">
@@ -946,13 +943,27 @@
           <div class="dtmxl_body">
             <div class="dtmxl_dl">
               <div class="dtmxl_dt">创伤主题</div>
-              <div class="dtmxl_dd">{{reviewData.workInfo.themeInfo.traumaTheme}}</div>
-              <div class="dtmxl_dds"><span>{{reviewData.workInfo.themeInfo.traumaNum}}</span>个</div>
+              <div class="dtmxl_dd">
+                {{ reviewData.workInfo.themeInfo.traumaTheme }}
+              </div>
+              <div class="dtmxl_dds">
+                <span>{{ reviewData.workInfo.themeInfo.traumaNum }}</span
+                >个
+              </div>
             </div>
             <div class="dtmxl_dl">
               <div class="dtmxl_dt">治愈主题</div>
-              <div class="dtmxl_dd">{{reviewData.workInfo.themeInfo.cureTheme != '' ? reviewData.workInfo.themeInfo.cureTheme : '/'}}</div>
-              <div class="dtmxl_dds"><span>{{reviewData.workInfo.themeInfo.cureNum}}</span>个</div>
+              <div class="dtmxl_dd">
+                {{
+                  reviewData.workInfo.themeInfo.cureTheme != ""
+                    ? reviewData.workInfo.themeInfo.cureTheme
+                    : "/"
+                }}
+              </div>
+              <div class="dtmxl_dds">
+                <span>{{ reviewData.workInfo.themeInfo.cureNum }}</span
+                >个
+              </div>
             </div>
           </div>
         </div>
@@ -977,13 +988,17 @@
       </div>
       <template>
         <el-table border :data="actionInfo">
-          <el-table-column prop="action_idx" label="操作序号"> </el-table-column>
-          <el-table-column prop="action_time" label="操作时间"> </el-table-column>
-          <el-table-column prop="bodies_name" label="沙具名称"> </el-table-column>
-          <el-table-column prop="bodies_type" label="沙具类别"> </el-table-column>
+          <el-table-column prop="action_idx" label="操作序号">
+          </el-table-column>
+          <el-table-column prop="action_time" label="操作时间">
+          </el-table-column>
+          <el-table-column prop="bodies_name" label="沙具名称">
+          </el-table-column>
+          <el-table-column prop="bodies_type" label="沙具类别">
+          </el-table-column>
           <el-table-column prop="action_content" label="操作内容">
             <template slot-scope="scope">
-              <span style="color:#006CFF">{{scope.row.action_content}}</span>
+              <span style="color:#006CFF">{{ scope.row.action_content }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -1041,7 +1056,7 @@ import personReport from "../Model/ModelReport.vue";
 import { mapGetters, mapMutations } from "vuex";
 import echarts from "../../assets/js/echarts";
 import Url from "@/assets/js/url.js";
-var fuluList = []
+var fuluList = [];
 const transColor = [
   {
     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -1104,19 +1119,19 @@ export default {
       imgList: [
         {
           name: "鸟瞰图",
-          img: require('../../assets/images/report/t001.png')
+          img: require("../../assets/images/report/t001.png")
         },
         {
           name: "西侧俯身45度视图",
-          img: require('../../assets/images/report/t001.png')
+          img: require("../../assets/images/report/t001.png")
         },
         {
           name: "东侧俯身45度视图",
-          img: require('../../assets/images/report/t001.png')
+          img: require("../../assets/images/report/t001.png")
         },
         {
           name: "操作者视图",
-          img: require('../../assets/images/report/t001.png')
+          img: require("../../assets/images/report/t001.png")
         }
       ],
       sandUseNumInfoName: [],
@@ -1167,7 +1182,8 @@ export default {
       myChartZhu: "",
       myTxtFlag: false,
       warningList: [],
-      sysList: []
+      sysList: [],
+      loading: null
     };
   },
   computed: {
@@ -1185,7 +1201,7 @@ export default {
   watch: {
     bindmodel: {
       handler: function(newVal) {
-        // console.log(newVal);
+        console.log(newVal);
         this.part11 = newVal.part11;
         this.part22 = newVal.part22;
         this.part33 = newVal.part33;
@@ -1194,7 +1210,7 @@ export default {
           this.part11 = false;
           this.part22 = false;
           this.part33 = false;
-          this.loading.close()
+          this.loading.close();
         } else {
           if (this.part55) {
             this.part55 = false;
@@ -1236,11 +1252,13 @@ export default {
     ...mapMutations(["setPersonFlag"]),
     pagination(pageNo, pageSize, array) {
       var offset = (pageNo - 1) * pageSize;
-      return (offset + pageSize >= array.length) ? array.slice(offset, array.length) : array.slice(offset, offset + pageSize);
+      return offset + pageSize >= array.length
+        ? array.slice(offset, array.length)
+        : array.slice(offset, offset + pageSize);
     },
     handleCurrentChange(val) {
-      this.currentPage = val
-      this.actionInfo = this.pagination(val, this.limit, fuluList)
+      this.currentPage = val;
+      this.actionInfo = this.pagination(val, this.limit, fuluList);
     },
     birdView() {
       this.birdFlag = true;
@@ -1299,7 +1317,7 @@ export default {
                 img: "data:image;base64," + data.data.workView.operatorView
               }
             ];
-            this.part55 = true
+            this.part55 = true;
           } else {
             that.$message.error(data.msg);
           }
@@ -1312,9 +1330,9 @@ export default {
       let that = this;
       this.loading = this.$loading({
         lock: true,
-        text: '报告生成中',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
+        text: "报告生成中",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)"
       });
       var param = {
         reportId: that.reportId
@@ -1326,21 +1344,25 @@ export default {
         .then(res => {
           let data = res.data;
           if (data.code == 0) {
-            if (data.data.actionInfoRet == 'null') {
-              data.data.actionInfoRet = '[]';
+            if (data.data.actionInfoRet == "null") {
+              data.data.actionInfoRet = "[]";
             }
-            console.log(data.data.actionInfoRet)
+            console.log(data.data.actionInfoRet);
             fuluList = JSON.parse(data.data.actionInfoRet);
             that.total = fuluList.length;
             that.actionInfo = this.pagination(1, this.limit, fuluList);
-            console.log(fuluList)
-            that.pageNum = fuluList.length == 0 ? 1 : Math.ceil(fuluList.length / that.limit);
+            console.log(fuluList);
+            that.pageNum =
+              fuluList.length == 0
+                ? 1
+                : Math.ceil(fuluList.length / that.limit);
             if (data.data.sandInfoRet.sandInfo) {
               that.sandInfo = data.data.sandInfoRet.sandInfo;
             } else {
               that.sandInfo = [];
             }
             this.part11 = true;
+            console.log(this.part11);
             setTimeout(() => {
               that.myTxtFlag = true;
             }, 500);
@@ -1379,22 +1401,6 @@ export default {
               that.myTxtFlag = true;
             }, 500);
             // console.log(data);
-          } else {
-            that.$message.error(data.msg);
-          }
-        })
-        .catch(res => {
-          console.log(res);
-        });
-      this.$http
-        .get(Url + "/aimw/report/reportBirdView", {
-          params: param
-        })
-        .then(res => {
-          let data = res.data;
-          if (data.code == 0) {
-            this.details.birdView = data.data.birdView
-            this.getfourImg(data.data.birdView)
           } else {
             that.$message.error(data.msg);
           }
@@ -1661,7 +1667,7 @@ export default {
               }
             ];
             data.data.warningList = [];
-            data.data.whatWarn = []
+            data.data.whatWarn = [];
             for (let i in oldWarning) {
               if (oldWarning[i].old != "正常") {
                 data.data.warningList.push(oldWarning[i]);
@@ -1670,7 +1676,7 @@ export default {
                 data.data.whatWarn.push(oldWarning[i]);
               }
             }
-            data.data.warningNum = data.data.whatWarn.length
+            data.data.warningNum = data.data.whatWarn.length;
             data.data.suggestion = data.data.suggestion.split("|||");
             let topArr = [];
             let duanArr = [];
@@ -1806,7 +1812,11 @@ export default {
               {
                 title: "抑郁",
                 grade: warningInfo.depressionScore,
-                gradep: Number(warningInfo.depressionScore) * 0.44 + Number(warningInfo.depressionScore) * 0.01 + 0.24 + "rem",
+                gradep:
+                  Number(warningInfo.depressionScore) * 0.44 +
+                  Number(warningInfo.depressionScore) * 0.01 +
+                  0.24 +
+                  "rem",
                 gradep1: Number(warningInfo.depressionScore) * 82 + 42 + "px",
                 level: warningInfo.depressionResult,
                 txtColor: depressionColorStr,
@@ -1818,7 +1828,11 @@ export default {
               {
                 title: "焦虑",
                 grade: warningInfo.anxietyScore,
-                gradep: Number(warningInfo.anxietyScore) * 0.44 + Number(warningInfo.anxietyScore) * 0.01 + 0.24 + "rem",
+                gradep:
+                  Number(warningInfo.anxietyScore) * 0.44 +
+                  Number(warningInfo.anxietyScore) * 0.01 +
+                  0.24 +
+                  "rem",
                 gradep1: Number(warningInfo.anxietyScore) * 82 + 42 + "px",
                 level: warningInfo.anxietyResult,
                 txtColor: anxietyColorStr,
@@ -1830,7 +1844,11 @@ export default {
               {
                 title: "强迫",
                 grade: warningInfo.forcedScore,
-                gradep: Number(warningInfo.forcedScore) * 0.44 + Number(warningInfo.forcedScore) * 0.01 + 0.24 + "rem",
+                gradep:
+                  Number(warningInfo.forcedScore) * 0.44 +
+                  Number(warningInfo.forcedScore) * 0.01 +
+                  0.24 +
+                  "rem",
                 gradep1: Number(warningInfo.forcedScore) * 82 + 42 + "px",
                 level: warningInfo.forcedResult,
                 txtColor: forcedColorStr,
@@ -1849,14 +1867,36 @@ export default {
             // console.log(this.sysList);
             // console.log(data.data);
             that.details = that.justInfo(data.data);
-            // console.log(that.details);
+            that.getBird()
             that.myChartInit();
             this.part33 = true;
             setTimeout(() => {
               that.myTxtFlag = true;
-              that.topBacks()
+              that.topBacks();
             }, 500);
             // console.log(data);
+          } else {
+            that.$message.error(data.msg);
+          }
+        })
+        .catch(res => {
+          console.log(res);
+        });
+    },
+    getBird() {
+      let that = this;
+      var param = {
+        reportId: that.reportId
+      };
+      this.$http
+        .get(Url + "/aimw/report/reportBirdView", {
+          params: param
+        })
+        .then(res => {
+          let data = res.data;
+          if (data.code == 0) {
+            this.details.birdView = data.data.birdView;
+            this.getfourImg(data.data.birdView);
           } else {
             that.$message.error(data.msg);
           }
@@ -1956,7 +1996,7 @@ export default {
       return data;
     },
     topBacks() {
-      console.log("///")
+      console.log("///");
       window.scrollTo(0, 0);
       setTimeout(() => {
         // 左边扶梯效果
@@ -1970,7 +2010,7 @@ export default {
         this.parta2 = this.$refs.parts12.offsetTop;
         this.parta3 = this.$refs.parts13.offsetTop;
         this.parta4 = this.$refs.parts14.offsetTop;
-        this.listenerFunction()
+        this.listenerFunction();
       }, 500);
     },
     trendTab(type) {
@@ -2047,8 +2087,8 @@ export default {
     },
     toReview() {
       // console.log(1111);
-      this.reviewFlag = !this.reviewFlag
-      this.topBacks()
+      this.reviewFlag = !this.reviewFlag;
+      this.topBacks();
       // this.$router.push({
       //   name: "detailsreview",
       //   params: { userID: this.reportId }
@@ -3857,7 +3897,7 @@ export default {
           }
         }
         .dtmcr_bts {
-          padding: 0 0.30rem;
+          padding: 0 0.3rem;
           margin-bottom: 0.2rem;
           .db_img {
             display: flex;
@@ -4044,10 +4084,10 @@ export default {
       }
       .el-carousel--horizontal {
         overflow: inherit;
-        .el-carousel__item--card{
+        .el-carousel__item--card {
           display: none;
         }
-        .is-in-stage{
+        .is-in-stage {
           display: block;
         }
       }
@@ -4196,7 +4236,7 @@ export default {
     }
     // 表格样式
     .el-table {
-      margin-bottom: 0.20rem;
+      margin-bottom: 0.2rem;
       min-height: auto;
       .el-table--border,
       .el-table--group,

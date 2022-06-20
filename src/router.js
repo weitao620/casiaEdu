@@ -28,25 +28,6 @@ export default new Router({
       name: 'login',
       component: Login
     },
-    // 手动调参
-    {
-      path: '/parameters',
-      name: 'parameters',
-      redirect: '/parameters/record',
-      component: () => import('./views/Parameters.vue'),
-      children: [
-        {
-          path: '/parameters/record',
-          name: 'record',
-          component: () => import('./views/Parameters/Record.vue')
-        },
-        {
-          path: '/parameters/adjustment',
-          name: 'adjustment',
-          component: () => import('./views/Parameters/Adjustment.vue')
-        }
-      ]
-    },
     {
       path: '/details',
       name: 'details',
