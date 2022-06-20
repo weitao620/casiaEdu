@@ -1343,12 +1343,13 @@ export default {
         .then(res => {
           let data = res.data;
           if (data.code == 0) {
-            if (data.data.actionInfoRet == "null") {
-              data.data.actionInfoRet = "[]";
-            }
+            // if (data.data.actionInfoRet == null) {
+            //   data.data.actionInfoRet = [];
+            // }
             console.log(data.data.actionInfoRet);
-            fuluList = JSON.parse(data.data.actionInfoRet);
+            fuluList = data.data.actionInfoRet.actionInfo
             that.total = fuluList.length;
+            console.log(fuluList)
             that.actionInfo = this.pagination(1, this.limit, fuluList);
             console.log(fuluList);
             that.pageNum =
