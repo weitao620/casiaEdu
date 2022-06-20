@@ -94,7 +94,7 @@ export default {
     if (user) {
       this.setUserName(user);
     }
-    this.auth()
+    // this.auth()
   },
   computed: {
     ...mapGetters(["getUserName"])
