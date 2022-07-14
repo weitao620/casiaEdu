@@ -573,6 +573,9 @@ export default {
             }
           });
           // console.log(listNew);
+          for (let i in listNew) {
+            listNew[i].mark = [...new Set(listNew[i].mark)]
+          }
           that.exlJson = listNew;
         };
         reader.readAsArrayBuffer(f);
