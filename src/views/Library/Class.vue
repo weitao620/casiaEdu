@@ -881,18 +881,23 @@ export default {
       // console.log(e);
     },
     handleSizeChange(val) {
+      console.log(this)
       this.limit = val;
       this.getClass(1);
     },
     handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`);
+      console.log(this)
+      console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.getClass(val);
     },
     handleSizeChange1(val) {
-      // console.log(`每页 ${val} 条`);
+      // this.limit1 = val;
+      // this.getClass(1);
+      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange1(val) {
+      console.log(this)
       this.currentPage1 = val;
       this.getRecovery(val);
     },
@@ -931,7 +936,7 @@ export default {
         // passport: that.formSearch.passport,
         // classIds: that.classIds
       };
-      that.currentPage = page;
+      that.currentPage1 = page;
       that.$http
         .get(Url + "/aimw/student/recycleBin", {
           params: param
@@ -948,6 +953,7 @@ export default {
               that.total1 = 0;
               that.pageNum1 = 1;
             }
+            console.log(this)
           } else {
             that.$message.error(res.data.msg);
           }
@@ -965,6 +971,7 @@ export default {
         class: ""
       };
       this.threeChange();
+      console.log(this.currentPage1)
       this.getRecovery(this.currentPage1);
     },
     // 新增班级
@@ -1519,6 +1526,7 @@ export default {
                 that.pageNum = 1;
               }
             }
+            console.log(this)
           } else {
             that.$message.error(res.data.msg);
           }
