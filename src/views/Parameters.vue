@@ -87,7 +87,7 @@ export default {
       }
       this.$http.post(Url + "/aimw/user/logout", param).then(res => {
         console.log(res);
-        localStorage.removeItem("isLogin");
+        localStorage.removeItem("isLoginNew");
         localStorage.removeItem("userInfo");
         localStorage.removeItem("userAuth");
         localStorage.removeItem("passport");

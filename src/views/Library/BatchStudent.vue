@@ -652,6 +652,11 @@ export default {
     },
     goSubmit1() {
       let that = this;
+      console.log(this.formSearch)
+      if (this.formSearch.class == "" || this.formSearch.className == "") {
+        this.$message.error("该学段和年级下尚未创建班级，请重新选择或者去创建对应的班级！");
+        return false;
+      }
       if (this.exlName == "") {
         this.$message.error("请先上传填好的文件！");
         return false;

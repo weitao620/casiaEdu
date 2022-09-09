@@ -12,7 +12,7 @@ if (host.indexOf('localhost') != -1 || host.indexOf('10.0.6.234') != -1) {
   url = '/api';
 }
 let index = find(host, '/', 2);
-let index2 = find(host, '/#', 0);
+let index2 = find(host, '#', 0);
 console.log(index)
 console.log(index2)
 console.log(window.location)
@@ -26,8 +26,13 @@ if (index2 != -1) {
 } else {
   post = host.substring(index, host.length)
 }
-
+console.log(post)
+console.log(url)
+if (post == '/') {
+  post = ''
+}
 url = url + post
 console.log(url.substring(url.length - 1, url.length))
+console.log(post)
 console.log(url)
 export default url;
