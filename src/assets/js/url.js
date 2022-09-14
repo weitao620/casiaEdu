@@ -12,7 +12,7 @@ if (host.indexOf('localhost') != -1 || host.indexOf('10.0.6.234') != -1) {
   url = '/api';
 }
 let index = find(host, '/', 2);
-let index2 = find(host, '/#', 0);
+let index2 = find(host, '#', 0);
 console.log(index)
 console.log(index2)
 console.log(window.location)
