@@ -655,6 +655,7 @@ export default {
       console.log(this.formSearch)
       if (this.formSearch.class == "") {
         this.$message.error("该学段和年级下尚未创建班级，请重新选择或者去创建对应的班级！");
+        
         return false;
       }
       if (this.exlName == "") {
