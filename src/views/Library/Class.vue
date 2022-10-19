@@ -944,6 +944,7 @@ export default {
           });
           this.dialogRecovery = false;
           this.getRecovery(1);
+          that.getClass(1);
         } else {
           that.$message.error(data.msg);
         }
@@ -1552,9 +1553,13 @@ export default {
                 that.total = data.count;
                 that.pageNum = Math.ceil(data.count / that.limit);
               } else {
-                that.tableData = [];
-                that.total = 0;
-                that.pageNum = 1;
+                if (data.count > 0) {
+                  this.getClass(page - 1)
+                } else {
+                  that.tableData = [];
+                  that.total = 0;
+                  that.pageNum = 1;
+                }
               }
             }
             console.log(this)
@@ -2183,8 +2188,8 @@ export default {
           left: 0;
           top: 0;
           bottom: 0;
-          overflow: hidden;
-          overflow-y: auto;
+          overflow: auto;
+          // overflow-y: auto;
           border: 1px solid #e1e9ff;
           margin: 0.46rem 0 0;
           background: linear-gradient(
@@ -2203,6 +2208,12 @@ export default {
               width: 0.14rem;
               height: 0.12rem;
             }
+          }
+          .el-tree-node {
+            white-space: nowrap;
+            outline: 0;
+            display: table;
+            padding: 0 0.05rem 0 0;
           }
           .el-tree-node__content {
             height: 0.36rem;
