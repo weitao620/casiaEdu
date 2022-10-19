@@ -316,7 +316,7 @@ export default {
       });
       // console.log(this.classList);
       if (this.classList) {
-        this.formSearch.class = this.classList[0].Pid;
+        // this.formSearch.class = this.classList[0].Pid;
       } else {
         this.formSearch.class = "";
       }
@@ -653,9 +653,12 @@ export default {
     goSubmit1() {
       let that = this;
       console.log(this.formSearch)
-      if (this.formSearch.class == "") {
+      if (this.formSearch.class == "" && that.classList.length == 0) {
         this.$message.error("该学段和年级下尚未创建班级，请重新选择或者去创建对应的班级！");
-        
+        return false;
+      }
+      if (this.formSearch.class == "" && that.classList.length != 0) {
+        this.$message.error("请选择导入的学段、年级、班级！");
         return false;
       }
       if (this.exlName == "") {

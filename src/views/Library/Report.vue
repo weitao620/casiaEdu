@@ -425,6 +425,7 @@
     </div>
     <!-- v-if="getSomePdfFlag" -->
     <!-- 批量导出 -->
+    <!-- 随便加个备注 -->
     <div style="height:0px;width:100%;overflow:hidden">
       <someReport
         :iList="pdfList"

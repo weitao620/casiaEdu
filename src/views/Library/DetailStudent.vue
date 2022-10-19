@@ -149,6 +149,7 @@
           </el-form-item>
           <el-form-item required label="学籍号：">
             <el-input
+              disabled
               v-model="formSearch.passport"
               placeholder="请输入学籍号"
             ></el-input>
