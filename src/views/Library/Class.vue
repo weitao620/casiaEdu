@@ -414,7 +414,7 @@
             </el-select>
           </section>
           <section class="address-select-list">
-            <el-select v-model="coveryForm.class" placeholder="全部">
+            <el-select v-model="coveryForm.class" @change="choseClass1" placeholder="全部">
               <el-option
                 v-for="item in classList1"
                 :key="item.Pid"
@@ -917,6 +917,37 @@ export default {
 
     // 回收站批量恢复
     someRecovery() {
+      let that = this;
+      console.log(that.checkListRe)
+      if (this.checkListRe.length == 0) {
+        this.$message({
+          type: "warning",
+          message: "没有选择要恢复的数据!"
+        });
+        return false;
+      }
+      var checkArrRe = [];
+      for (let i in this.checkListRe) {
+        checkArrRe.push({ passport: this.checkListRe[i].passport });
+      }
+      let param = {
+        passports: checkArrRe
+      }
+      // console.log(param);
+      that.$http.put(Url + "/aimw/student/recoveryData", param).then(res => {
+        // console.log(res);
+        var data = res.data;
+        if (data.code == 0) {
+          that.$message({
+            type: "success",
+            message: "批量恢复成功!"
+          });
+          this.dialogRecovery = false;
+          this.getRecovery(1);
+        } else {
+          that.$message.error(data.msg);
+        }
+      });
       this.dialogRecovery = false;
     },
     // 选择要操作的回收站数据
@@ -1705,6 +1736,7 @@ export default {
           return false;
         }
       });
+      this.getRecovery(1)
     },
     choseGrade1(value) {
       // console.log(value);
@@ -1716,6 +1748,11 @@ export default {
           return false;
         }
       });
+
+      this.getRecovery(1)
+    },
+    choseClass1(value) {
+      this.getRecovery(1)
     },
     // 学段 年级 班级 三级联动
     levleChange(val) {
@@ -2753,8 +2790,8 @@ export default {
       .el-table {
         height: 3.2rem;
         min-height: 4.64rem;
-        overflow: hidden;
-        overflow-y: auto;
+        // overflow: hidden;
+        // overflow-y: auto;
       }
       .el_btn_box {
         justify-content: flex-start !important;
