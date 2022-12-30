@@ -27,7 +27,7 @@
           <el-select
             v-model="formSearchR.time"
             @change="choseYear"
-            placeholder="全部"
+            placeholder="全部学年"
           >
             <el-option
               v-for="item in sectionList"
@@ -331,7 +331,7 @@ export default {
       pageNum: 4,
       currentPage: 2,
       formSearchR: {
-        time: "",
+        time: '',
         name: "",
         number: "",
         sex: "",
@@ -435,51 +435,70 @@ export default {
     openYearInit() {
       let that = this;
       this.$http
-        .get(Url + "/aimw/school/listSchoolYear")
+        .get(Url + "/aimw/student/listUnusualPeriod")
         .then(res => {
           let data = res.data.data;
           if (res.data.code == 0) {
             if (data) {
               this.yearDetail = data;
-              this.yearSet = data.year;
+              // this.yearSet = data.year;
               console.log(this.yearDetail);
               let arr5 = [
                 {
                   year: "",
                   years: [],
                   yearName: "全部学年"
-                },
-                {
-                  year: data.year,
-                  years: [data.year - 1 + "-01-01", data.year + "-12-31"],
-                  yearName: data.year - 1 + "-" + data.year + "学年"
-                },
-                {
-                  year: data.year + 1,
-                  years: [data.year + "-01-01", data.year + 1 + "-12-31"],
-                  yearName: data.year + "-" + (data.year + 1) + "学年"
-                },
-                {
-                  year: data.year + 2,
-                  years: [data.year + 1 + "-01-01", data.year + 2 + "-12-31"],
-                  yearName: data.year + 1 + "-" + (data.year + 2) + "学年"
-                },
-                {
-                  year: data.year + 3,
-                  years: [data.year + 2 + "-01-01", data.year + 3 + "-12-31"],
-                  yearName: data.year + 2 + "-" + (data.year + 3) + "学年"
-                },
-                {
-                  year: data.year + 4,
-                  years: [data.year + 3 + "-01-01", data.year + 4 + "-12-31"],
-                  yearName: data.year + 3 + "-" + (data.year + 4) + "学年"
-                },
-                {
-                  year: data.year + 5,
-                  years: [data.year + 4 + "-01-01", data.year + 5 + "-12-31"],
-                  yearName: data.year + 4 + "-" + (data.year + 5) + "学年"
                 }
-              ];
+              ]
+              if (data && data.length > 0) {
+                for (let i in data) {
+                  data[i].year = data[i].describe.split('-')[0]
+                  data[i].years = [data[i].startTime, data[i].endTime]
+                  data[i].yearName = data[i].describe
+                }
+                arr5 = arr5.concat(data)
+              }
+              // this.formSearchR.time = arr5[0].years
+              // this.yearDetail = data;
+              // this.yearSet = data.year;
+              // console.log(this.yearDetail);
+              // let arr5 = [
+              //   {
+              //     year: "",
+              //     years: [],
+              //     yearName: "全部学年"
+              //   },
+              //   {
+              //     year: data.year,
+              //     years: [data.year - 1 + "-01-01", data.year + "-12-31"],
+              //     yearName: data.year - 1 + "-" + data.year + "学年"
+              //   },
+              //   {
+              //     year: data.year + 1,
+              //     years: [data.year + "-01-01", data.year + 1 + "-12-31"],
+              //     yearName: data.year + "-" + (data.year + 1) + "学年"
+              //   },
+              //   {
+              //     year: data.year + 2,
+              //     years: [data.year + 1 + "-01-01", data.year + 2 + "-12-31"],
+              //     yearName: data.year + 1 + "-" + (data.year + 2) + "学年"
+              //   },
+              //   {
+              //     year: data.year + 3,
+              //     years: [data.year + 2 + "-01-01", data.year + 3 + "-12-31"],
+              //     yearName: data.year + 2 + "-" + (data.year + 3) + "学年"
+              //   },
+              //   {
+              //     year: data.year + 4,
+              //     years: [data.year + 3 + "-01-01", data.year + 4 + "-12-31"],
+              //     yearName: data.year + 3 + "-" + (data.year + 4) + "学年"
+              //   },
+              //   {
+              //     year: data.year + 5,
+              //     years: [data.year + 4 + "-01-01", data.year + 5 + "-12-31"],
+              //     yearName: data.year + 4 + "-" + (data.year + 5) + "学年"
+              //   }
+              // ];
               console.log(arr5);
               this.sectionList = arr5;
             }

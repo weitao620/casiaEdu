@@ -498,7 +498,7 @@ export default {
                   objs.birth = obj[key];
                 }
                 if (key == str[4]) {
-                  objs.passport = obj[key].replace(/\s+/g, '');
+                  objs.passport = String(obj[key]).replace(/\s+/g, '');
                 }
                 if (key == str[5]) {
                   objs.enterYear = obj[key];

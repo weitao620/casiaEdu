@@ -562,46 +562,55 @@ export default {
     openYearInit() {
       let that = this;
       this.$http
-        .get(Url + "/aimw/school/listSchoolYear")
+        .get(Url + "/aimw/student/listUnusualPeriod")
         .then(res => {
           let data = res.data.data;
           if (res.data.code == 0) {
             if (data) {
               this.yearDetail = data;
-              this.yearSet = data.year;
+              // this.yearSet = data.year;
               console.log(this.yearDetail);
-              let arr5 = [
-                {
-                  year: data.year,
-                  years: [data.year - 1 + "-01-01", data.year + "-12-31"],
-                  yearName: data.year - 1 + "-" + data.year + "学年"
-                },
-                {
-                  year: data.year + 1,
-                  years: [data.year + "-01-01", data.year + 1 + "-12-31"],
-                  yearName: data.year + "-" + (data.year + 1) + "学年"
-                },
-                {
-                  year: data.year + 2,
-                  years: [data.year + 1 + "-01-01", data.year + 2 + "-12-31"],
-                  yearName: data.year + 1 + "-" + (data.year + 2) + "学年"
-                },
-                {
-                  year: data.year + 3,
-                  years: [data.year + 2 + "-01-01", data.year + 3 + "-12-31"],
-                  yearName: data.year + 2 + "-" + (data.year + 3) + "学年"
-                },
-                {
-                  year: data.year + 4,
-                  years: [data.year + 3 + "-01-01", data.year + 4 + "-12-31"],
-                  yearName: data.year + 3 + "-" + (data.year + 4) + "学年"
-                },
-                {
-                  year: data.year + 5,
-                  years: [data.year + 4 + "-01-01", data.year + 5 + "-12-31"],
-                  yearName: data.year + 4 + "-" + (data.year + 5) + "学年"
+              let arr5 = []
+              if (data && data.length > 0) {
+                for (let i in data) {
+                  data[i].year = data[i].describe.split('-')[0]
+                  data[i].years = [data[i].startTime, data[i].endTime]
+                  data[i].yearName = data[i].describe
                 }
-              ];
+                arr5 = data
+              }
+              
+              //   {
+              //     year: data.year,
+              //     years: [data.year - 1 + "-01-01", data.year + "-12-31"],
+              //     yearName: data.year - 1 + "-" + data.year + "学年"
+              //   },
+              //   {
+              //     year: data.year + 1,
+              //     years: [data.year + "-01-01", data.year + 1 + "-12-31"],
+              //     yearName: data.year + "-" + (data.year + 1) + "学年"
+              //   },
+              //   {
+              //     year: data.year + 2,
+              //     years: [data.year + 1 + "-01-01", data.year + 2 + "-12-31"],
+              //     yearName: data.year + 1 + "-" + (data.year + 2) + "学年"
+              //   },
+              //   {
+              //     year: data.year + 3,
+              //     years: [data.year + 2 + "-01-01", data.year + 3 + "-12-31"],
+              //     yearName: data.year + 2 + "-" + (data.year + 3) + "学年"
+              //   },
+              //   {
+              //     year: data.year + 4,
+              //     years: [data.year + 3 + "-01-01", data.year + 4 + "-12-31"],
+              //     yearName: data.year + 3 + "-" + (data.year + 4) + "学年"
+              //   },
+              //   {
+              //     year: data.year + 5,
+              //     years: [data.year + 4 + "-01-01", data.year + 5 + "-12-31"],
+              //     yearName: data.year + 4 + "-" + (data.year + 5) + "学年"
+              //   }
+              // ];
               console.log(arr5);
               this.sectionList = arr5;
             }
@@ -1497,6 +1506,15 @@ export default {
           width: auto;
           .el-button + .el-button {
             margin-left: 0.18rem;
+          }
+        }
+      }
+      .time_data {
+        // width: 3.35rem;
+        .el-form-item__content {
+          // width: 100% !important;
+          .el-range-editor.el-input__inner{
+            width: 3.35rem;
           }
         }
       }
