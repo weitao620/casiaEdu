@@ -1776,6 +1776,8 @@ export default {
   width: 1191px;
   box-sizing: border-box;
   margin: 0 auto;
+  transform: scale(0.8);
+  transform-origin: 0 0;
   // position: absolute;
   // top: 0;
   // left: 0;

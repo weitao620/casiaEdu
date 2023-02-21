@@ -69,7 +69,7 @@
           <img
             v-if="power1"
             @click="openYear"
-            src="../../assets/images/bianji.png"
+            src="../../assets/images/teachingList.png"
             alt=""
           />
         </div>
@@ -131,10 +131,9 @@
             </div>
           </div>
           <div :class="['tree_box', { mar00: !power2 || authType != 2 }]">
+              <!-- default-expand-all -->
             <el-tree
               :data="treeData"
-              show-checkbox
-              default-expand-all
               :default-expanded-keys="expandsList"
               :default-checked-keys="checksList"
               node-key="Pid"
@@ -148,7 +147,7 @@
           </div>
         </div>
         <div class="class_student">
-          <div class="no_data" v-if="classIds.length == 0">
+          <div class="no_data" v-if="classIds.length == 0 && formSearch.graduate == 0">
             <div class="no_b">
               <img src="../../assets/images/nothing.png" alt="" />
               <p>您未勾选班级，或您还没有班级，联系管理员创建第一个班级吧～</p>
@@ -158,10 +157,10 @@
             <div class="el_btn_box">
               <div class="el_btn_left">
                 <img src="../../assets/images/deskmate.png" alt="" />
-                <span class="shu_year">学生列表</span>
+                <span class="shu_year">{{ checkName }}</span>
               </div>
               <div class="el_btn_right">
-                <div class="el_one" v-if="power9">
+                <div class="el_one" v-if="power9 && formSearch.graduate == 0">
                   <el-button
                     class="el_btn_one"
                     @click="addStudent"
@@ -171,7 +170,7 @@
                     新增学生
                   </el-button>
                 </div>
-                <div class="el_two" v-if="power7">
+                <div class="el_two" v-if="power7 && formSearch.graduate == 0">
                   <el-button
                     class="el_btn_two"
                     @click="passWordInit"
@@ -181,9 +180,19 @@
                     密码初始化
                   </el-button>
                 </div>
-                <div class="el_two" v-if="power8">
+                <div class="el_two" v-if="power8 && formSearch.graduate == 0">
                   <el-button
                     class="el_btn_two"
+                    @click="someDelete()"
+                    type="primary"
+                  >
+                    <i class="iconfont icon-shanchu1"></i>
+                    批量删除
+                  </el-button>
+                </div>
+                <div class="el_one" v-if="power8 && formSearch.graduate == 1">
+                  <el-button
+                    class="el_btn_one"
                     @click="someDelete()"
                     type="primary"
                   >
@@ -202,7 +211,8 @@
                 @selection-change="checkboxChange"
               >
                 <el-table-column type="selection"> </el-table-column>
-                <el-table-column type="index" label="序号" :index="indexMethod"> </el-table-column>
+                <el-table-column type="index" label="序号" :index="indexMethod">
+                </el-table-column>
                 <el-table-column prop="name" label="姓名"> </el-table-column>
                 <el-table-column prop="gradeName" label="年级">
                 </el-table-column>
@@ -239,7 +249,7 @@
                       type="text"
                       size="small"
                       @click="fixPass(scope.row.passport)"
-                      v-if="power11"
+                      v-if="power11  && formSearch.graduate == 0"
                       >密码修改</el-button
                     >
                     <el-button
@@ -256,7 +266,7 @@
           </div>
         </div>
       </div>
-      <div class="table_page" v-if="tableData.length > 0">
+      <div class="table_page" v-if="tableData.length > 0 && classIds.length != 0">
         <div class="page_total">
           共 <span>{{ total }}</span> 条 , 第
           <span>{{ currentPage }}/{{ pageNum }}</span> 页
@@ -414,7 +424,11 @@
             </el-select>
           </section>
           <section class="address-select-list">
-            <el-select v-model="coveryForm.class" @change="choseClass1" placeholder="全部">
+            <el-select
+              v-model="coveryForm.class"
+              @change="choseClass1"
+              placeholder="全部"
+            >
               <el-option
                 v-for="item in classList1"
                 :key="item.Pid"
@@ -432,7 +446,8 @@
           @selection-change="recoveryChange"
         >
           <el-table-column type="selection"> </el-table-column>
-          <el-table-column type="index" label="序号" :index="indexMethod1"> </el-table-column>
+          <el-table-column type="index" label="序号" :index="indexMethod1">
+          </el-table-column>
           <el-table-column prop="name" label="姓名"> </el-table-column>
           <el-table-column prop="passport" label="账号"> </el-table-column>
           <el-table-column prop="sectionName" label="学段"> </el-table-column>
@@ -516,13 +531,13 @@
     <el-dialog
       class="fix_pass add_class_dia set_year"
       :close-on-click-modal="false"
-      title="修改学年学期"
+      title="学年详情"
       :visible.sync="yearFlag"
     >
       <el-form :model="yearForm">
         <div class="set_year_t">
           <span></span>
-          {{ yearSet - 1 }}-{{ yearSet }}学年设置
+          {{ yearDetail.describe }}
         </div>
         <div class="set_year_d">
           <el-form-item
@@ -538,10 +553,15 @@
               :editable="false"
               :clearable="false"
               @change="startTimeChange"
+              disabled
             >
             </el-date-picker>
           </el-form-item>
-          <el-form-item class="time_data" label="结束日期:" prop="endTime">
+          <el-form-item
+            class="time_data time_bg1"
+            label="结束日期:"
+            prop="endTime"
+          >
             <el-date-picker
               v-model="yearForm.endTime"
               type="date"
@@ -550,13 +570,14 @@
               :editable="false"
               :clearable="false"
               @change="endTimeChange"
+              disabled
             >
             </el-date-picker>
           </el-form-item>
         </div>
         <div class="set_year_t" style="margin-top:0.1rem">
           <span></span>
-          升学期设置
+          升学期
         </div>
         <div class="set_year_d">
           <el-form-item
@@ -576,7 +597,7 @@
             </el-date-picker>
           </el-form-item>
         </div>
-        <div class="set_year_t" style="margin-top:0.1rem">
+        <!-- <div class="set_year_t" style="margin-top:0.1rem">
           <span></span>
           第一学期设置
         </div>
@@ -647,11 +668,11 @@
             >
             </el-date-picker>
           </el-form-item>
-        </div>
+        </div> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="yearFlag = false">取 消</el-button>
-        <el-button type="primary" @click="setYear">确 定</el-button>
+        <el-button type="primary" @click="yearFlag = false">关 闭</el-button>
+        <!-- <el-button type="primary" @click="setYear">确 定</el-button> -->
       </div>
     </el-dialog>
   </div>
@@ -663,6 +684,7 @@ export default {
   name: "report",
   data() {
     return {
+      checkName: "在读",
       power1: false,
       power2: false,
       power3: false,
@@ -744,7 +766,8 @@ export default {
       twoPassFlag: false,
       formSearch: {
         name: "",
-        passport: ""
+        passport: "",
+        graduate: 0
       },
       classIds: [],
       tableData: [],
@@ -770,7 +793,7 @@ export default {
   mounted() {
     // aaa
     let that = this;
-    this.authType = localStorage.getItem("userType")
+    this.authType = localStorage.getItem("userType");
     this.powerData();
     this.getCheckedKeys();
     // 获取左侧班级树
@@ -834,20 +857,81 @@ export default {
     },
     // 渲染树
     renderContent(h, { node, data, store }) {
-      if (data.children) {
-        return (
-          <span class="custom-tree-node">
-            <i class="iconfont icon-wenjian"></i>
-            <span>{node.label}</span>
-          </span>
-        );
+      // if (data.children) {
+      //   return (
+      //     <span class="custom-tree-node">
+      //       <i class="iconfont icon-wenjian"></i>
+      //       <span>{node.label}</span>
+      //     </span>
+      //   );
+      // } else {
+      //   return (
+      //     <span class="custom-tree-node">
+      //       <span>{node.label}</span>
+      //     </span>
+      //   );
+      // }
+      if (data.list) {
+        if (data.Name == this.checkName) {
+          return (
+            <span
+              class="custom-tree-node"
+              style="width:100%;text-align:left"
+              on-click={() => this.treeChecked(event, data, node)}
+            >
+              <span style="color: #737AFD">{node.label}</span>
+            </span>
+          );
+        } else {
+          return (
+            <span
+              class="custom-tree-node"
+              style="width:100%;text-align:left"
+              on-click={() => this.treeChecked(event, data, node)}
+            >
+              <span>{node.label}</span>
+            </span>
+          );
+        }
       } else {
-        return (
-          <span class="custom-tree-node">
-            <span>{node.label}</span>
-          </span>
-        );
+        if (data.Name == this.checkName) {
+          return (
+            <span
+              class="custom-tree-node"
+              style="width:100%;text-align:left"
+              on-click={() => this.treeChecked(event, data, node)}
+            >
+              <span style="color: #737AFD">{node.label}</span>
+            </span>
+          );
+        } else {
+          return (
+            <span
+              class="custom-tree-node"
+              style="width:100%;text-align:left"
+              on-click={() => this.treeChecked(event, data, node)}
+            >
+              <span>{node.label}</span>
+            </span>
+          );
+        }
       }
+    },
+    treeChecked(event, data, node) {
+      console.log(123);
+      console.log(data, node);
+      if (data.Name == "已毕业") {
+        this.checkName = data.Name;
+        this.getClassIds(data);
+        // this.getTree();
+        // console.log("取消掉，恢复到全部");
+        // this.checkName = "在读";
+      } else {
+        console.log("选中当前点击");
+        this.checkName = data.Name;
+        this.getClassIds(data);
+      }
+      event.stopPropagation();
     },
     // 选择班级
     handleCheckChange(data, checked, indeterminate) {
@@ -855,7 +939,7 @@ export default {
       // console.log(checked.checkedKeys);
       // console.log(indeterminate);
       // console.log(this.checksList);
-      this.checksList = checked.checkedKeys
+      this.checksList = checked.checkedKeys;
       // console.log(this.checksList.indexOf(data.Pid));
       // // if (this.checksList.indexOf(data.Pid) != -1) {
       // //   this.checksList.splice(this.checksList.indexOf(data.Pid), 1);
@@ -881,12 +965,12 @@ export default {
       // console.log(e);
     },
     handleSizeChange(val) {
-      console.log(this)
+      console.log(this);
       this.limit = val;
       this.getClass(1);
     },
     handleCurrentChange(val) {
-      console.log(this)
+      console.log(this);
       console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.getClass(val);
@@ -897,7 +981,7 @@ export default {
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange1(val) {
-      console.log(this)
+      console.log(this);
       this.currentPage1 = val;
       this.getRecovery(val);
     },
@@ -918,7 +1002,7 @@ export default {
     // 回收站批量恢复
     someRecovery() {
       let that = this;
-      console.log(that.checkListRe)
+      console.log(that.checkListRe);
       if (this.checkListRe.length == 0) {
         this.$message({
           type: "warning",
@@ -932,7 +1016,7 @@ export default {
       }
       let param = {
         passports: checkArrRe
-      }
+      };
       // console.log(param);
       that.$http.put(Url + "/aimw/student/recoveryData", param).then(res => {
         // console.log(res);
@@ -985,7 +1069,7 @@ export default {
               that.total1 = 0;
               that.pageNum1 = 1;
             }
-            console.log(this)
+            console.log(this);
           } else {
             that.$message.error(res.data.msg);
           }
@@ -1003,7 +1087,7 @@ export default {
         class: ""
       };
       this.threeChange();
-      console.log(this.currentPage1)
+      console.log(this.currentPage1);
       this.getRecovery(this.currentPage1);
     },
     // 新增班级
@@ -1408,37 +1492,37 @@ export default {
           });
         });
     },
-    // 保存学年设置
-    setYear() {
-      let that = this;
-      // console.log(that.yearForm);
-      let param = that.yearForm;
-      param.describe = this.yearSet - 1 + "-" + this.yearSet + "学年";
-      this.$http
-        .put(Url + "/aimw/school/updateSchoolYear", that.yearForm)
-        .then(res => {
-          let data = res.data.data;
-          if (res.data.code == 0) {
-            // if (data) {
-            this.yearFlag = false;
-            // console.log(data);
-            that.$message.success("设置学年成功!");
-            that.openYearInit();
-            // }
-          } else {
-            that.$message.error(res.data.msg);
-          }
-        })
-        .catch(res => {
-          console.log(res);
-        });
-    },
+    // // 保存学年设置
+    // setYear() {
+    //   let that = this;
+    //   // console.log(that.yearForm);
+    //   let param = that.yearForm;
+    //   param.describe = this.yearSet - 1 + "-" + this.yearSet + "学年";
+    //   this.$http
+    //     .put(Url + "/aimw/school/updateSchoolYear", that.yearForm)
+    //     .then(res => {
+    //       let data = res.data.data;
+    //       if (res.data.code == 0) {
+    //         // if (data) {
+    //         this.yearFlag = false;
+    //         // console.log(data);
+    //         that.$message.success("设置学年成功!");
+    //         that.openYearInit();
+    //         // }
+    //       } else {
+    //         that.$message.error(res.data.msg);
+    //       }
+    //     })
+    //     .catch(res => {
+    //       console.log(res);
+    //     });
+    // },
     startTimeChange(val) {
       this.yearForm.startTime = this.formTimes(val);
     },
     endTimeChange(val) {
       this.yearForm.endTime = this.formTimes(val);
-      this.yearSet = this.yearForm.endTime.split("-")[0];
+      // this.yearSet = this.yearForm.endTime.split("-")[0];
     },
     firstStartTimeChange(val) {
       this.yearForm.firstStartTime = this.formTimes(val);
@@ -1478,7 +1562,7 @@ export default {
           if (res.data.code == 0) {
             if (data) {
               this.yearDetail = data;
-              this.yearSet = data.year;
+              // this.yearSet = data.year;
               this.yearForm.startTime = data.startTime;
               this.yearForm.endTime = data.endTime;
               this.yearForm.firstStartTime = data.firstStartTime;
@@ -1503,7 +1587,7 @@ export default {
           if (res.data.code == 0) {
             if (data) {
               this.yearDetail = data;
-              this.yearSet = data.year;
+              // this.yearSet = data.year;
               this.yearForm.startTime = data.startTime;
               this.yearForm.endTime = data.endTime;
               this.yearForm.firstStartTime = data.firstStartTime;
@@ -1522,7 +1606,16 @@ export default {
     // 获取学生列表
     getClass(page) {
       let that = this;
+      console.log(that.formSearch)
+      console.log(that.checksList)
       let classArr = [];
+      if (this.checksList.length == 1 && this.checksList[0] == 20000) {
+        that.formSearch.graduate = 1
+        this.$forceUpdate()
+      } else {
+        that.formSearch.graduate = 0
+        this.$forceUpdate()
+      }
       for (let i in this.checksList) {
         // console.log(this.checksList[i]);
         if (this.checksList[i] % 100 != 0) {
@@ -1530,12 +1623,14 @@ export default {
         }
       }
       this.classIds = classArr;
-      // console.log(this.classIds);
+      console.log(this.classIds);
+      
       var param = {
         currentPage: page,
         pageSize: that.limit,
         name: that.formSearch.name,
         passport: that.formSearch.passport,
+        graduate: that.formSearch.graduate,
         classIds: that.classIds
       };
       that.currentPage = page;
@@ -1554,15 +1649,19 @@ export default {
                 that.pageNum = Math.ceil(data.count / that.limit);
               } else {
                 if (data.count > 0) {
-                  this.getClass(page - 1)
+                  this.getClass(page - 1);
                 } else {
                   that.tableData = [];
                   that.total = 0;
                   that.pageNum = 1;
                 }
               }
+            } else {
+              that.tableData = [];
+              that.total = 0;
+              that.pageNum = 1;
             }
-            console.log(this)
+            console.log(this);
           } else {
             that.$message.error(res.data.msg);
           }
@@ -1580,6 +1679,37 @@ export default {
     // 重置
     resetForm(formName) {
       this.$refs[formName].resetFields();
+      this.getClass(1);
+    },
+    getIdsList(data, idsList) {
+      console.log(data);
+      for (let item of data) {
+        console.log(item);
+        if (item.Mark === 1) {
+          console.log(item);
+          if (!item.list) {
+            idsList.push(item.Pid);
+          }
+          if (item.list && item.list.length > 0) {
+            console.log(item.list);
+            this.getIdsList(item.list, idsList);
+          }
+        }
+      }
+    },
+    getClassIds(data) {
+      console.log(data);
+      let that = this;
+      that.checksList = []; // 获取哪几个班的班级数据
+      let sArr = [];
+      if (data.list && data.list.length != 0) {
+        console.log(data);
+        this.getIdsList(data.list, sArr);
+      } else {
+        sArr.push(data.Pid);
+      }
+      that.checksList = sArr;
+      console.log(sArr);
       this.getClass(1);
     },
     // 获取左侧班级树
@@ -1607,40 +1737,40 @@ export default {
                   child0.push(schoolOrg[j]);
                 }
               }
-              schoolOrg = child0 // 只剩下在读了
+              schoolOrg = child0; // 只剩下在读了
               for (let j in schoolOrg) {
                 // 现在只有一个在读
-                let list1 = schoolOrg[j].list
-                let child1 = []
+                let list1 = schoolOrg[j].list;
+                let child1 = [];
                 for (let k in list1) {
                   if (list1[k].Mark == 1) {
                     child1.push(list1[k]);
                   }
                 }
-                schoolOrg[j].list = child1
+                schoolOrg[j].list = child1;
               }
               // 这时的数组里拿到了有权限的初中、高中没权限
               for (let j in schoolOrg) {
                 for (let k in schoolOrg[j].list) {
-                  let child2 = []
+                  let child2 = [];
                   for (let l in schoolOrg[j].list[k].list) {
                     if (schoolOrg[j].list[k].list[l].Mark == 1) {
                       child2.push(schoolOrg[j].list[k].list[l]);
                     }
                   }
-                  schoolOrg[j].list[k].list = child2
+                  schoolOrg[j].list[k].list = child2;
                 }
               }
               for (let j in schoolOrg) {
                 for (let k in schoolOrg[j].list) {
                   for (let l in schoolOrg[j].list[k].list) {
-                    let child3 = []
+                    let child3 = [];
                     for (let m in schoolOrg[j].list[k].list[l].list) {
                       if (schoolOrg[j].list[k].list[l].list[m].Mark == 1) {
                         child3.push(schoolOrg[j].list[k].list[l].list[m]);
                       }
                     }
-                    schoolOrg[j].list[k].list[l].list = child3
+                    schoolOrg[j].list[k].list[l].list = child3;
                   }
                 }
               }
@@ -1741,7 +1871,7 @@ export default {
           return false;
         }
       });
-      this.getRecovery(1)
+      this.getRecovery(1);
     },
     choseGrade1(value) {
       // console.log(value);
@@ -1754,10 +1884,10 @@ export default {
         }
       });
 
-      this.getRecovery(1)
+      this.getRecovery(1);
     },
     choseClass1(value) {
-      this.getRecovery(1)
+      this.getRecovery(1);
     },
     // 学段 年级 班级 三级联动
     levleChange(val) {
@@ -1829,40 +1959,40 @@ export default {
                   child0.push(schoolOrg[j]);
                 }
               }
-              schoolOrg = child0 // 只剩下在读了
+              schoolOrg = child0; // 只剩下在读了
               for (let j in schoolOrg) {
                 // 现在只有一个在读
-                let list1 = schoolOrg[j].list
-                let child1 = []
+                let list1 = schoolOrg[j].list;
+                let child1 = [];
                 for (let k in list1) {
                   if (list1[k].Mark == 1) {
                     child1.push(list1[k]);
                   }
                 }
-                schoolOrg[j].list = child1
+                schoolOrg[j].list = child1;
               }
               // 这时的数组里拿到了有权限的初中、高中没权限
               for (let j in schoolOrg) {
                 for (let k in schoolOrg[j].list) {
-                  let child2 = []
+                  let child2 = [];
                   for (let l in schoolOrg[j].list[k].list) {
                     if (schoolOrg[j].list[k].list[l].Mark == 1) {
                       child2.push(schoolOrg[j].list[k].list[l]);
                     }
                   }
-                  schoolOrg[j].list[k].list = child2
+                  schoolOrg[j].list[k].list = child2;
                 }
               }
               for (let j in schoolOrg) {
                 for (let k in schoolOrg[j].list) {
                   for (let l in schoolOrg[j].list[k].list) {
-                    let child3 = []
+                    let child3 = [];
                     for (let m in schoolOrg[j].list[k].list[l].list) {
                       if (schoolOrg[j].list[k].list[l].list[m].Mark == 1) {
                         child3.push(schoolOrg[j].list[k].list[l].list[m]);
                       }
                     }
-                    schoolOrg[j].list[k].list[l].list = child3
+                    schoolOrg[j].list[k].list[l].list = child3;
                   }
                 }
               }
@@ -2098,6 +2228,10 @@ export default {
         color: #7786ac;
         display: flex;
         align-items: center;
+        // cursor: pointer;
+        // span{
+        //   cursor: pointer;
+        // }
         .shu_line {
           display: block;
           width: 0.03rem;
@@ -2109,6 +2243,7 @@ export default {
           margin: 0 0.08rem;
         }
         img {
+          cursor: pointer;
           width: 0.18rem;
           height: 0.18rem;
         }
@@ -2217,10 +2352,21 @@ export default {
           }
           .el-tree-node__content {
             height: 0.36rem;
+            background: transparent !important;
+            .custom-tree-node{
+              cursor: pointer;
+              span{
+                cursor: pointer;
+              }
+            }
+            
             .el-checkbox__inner::after {
               width: 3px !important;
               height: 7px !important;
             }
+          }
+          .el-tree-node__content:hover{
+            background: transparent;
           }
         }
         .mar00 {
@@ -2773,6 +2919,8 @@ export default {
         padding: 0.05rem 0.15rem 0;
         width: 2.94rem;
         margin: 0 auto 0.24rem;
+        display: flex;
+        justify-content: center;
         .el-button {
           width: 1.12rem !important;
           height: 0.36rem !important;
@@ -3060,11 +3208,17 @@ export default {
         }
         .time_bg1 {
           .el-input__inner {
-            background: linear-gradient(
-              0deg,
-              rgba(196, 236, 255, 0.14) 0%,
-              rgba(151, 205, 255, 0.14) 100%
-            );
+            // background: linear-gradient(
+            //   0deg,
+            //   rgba(196, 236, 255, 0.14) 0%,
+            //   rgba(151, 205, 255, 0.14) 100%
+            // );
+          }
+          .el-input.is-disabled .el-input__inner {
+            background-color: #f5f7fa !important;
+            border-color: #e4e7ed;
+            color: #7786ac !important;
+            cursor: not-allowed;
           }
         }
       }
