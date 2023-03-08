@@ -27,7 +27,7 @@ export default {
       context.scale(1.5, 1.5) // 增强图片清晰度
       context.translate(0, -eleOffsetTop)
       html2canvas(ele, {
-        scale: 1.2, // 提升画面质量，但是会增加文件大小
+        scale: 1, // 提升画面质量，但是会增加文件大小
         useCORS: true, // 允许跨域图片 当图片是链接地址时，需加该属性，否组无法显示图片
         imageTimeout: 0, // 图片加载延迟，默认延迟为0，单位毫秒
         // height: ele.scrollHeight, // canvas的高度设定
