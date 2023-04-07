@@ -126,7 +126,7 @@
         </div>
         <div class="dtp_main">
           <ul>
-            <li style="width:2.2rem">
+            <li style="width:3.2rem">
               <img
                 class="dt_per1"
                 src="../../assets/images/report/person1.png"
@@ -135,7 +135,7 @@
               <span class="dt_blod">姓名：</span>
               <span>{{ details.name }}</span>
             </li>
-            <li style="width:2.6rem;display:flex">
+            <li style="width:3.8rem;display:flex">
               <img
                 class="dt_per2"
                 src="../../assets/images/report/person2.png"
@@ -146,7 +146,7 @@
                 details.passport
               }}</span>
             </li>
-            <li style="width:3rem">
+            <li style="width:3.2rem">
               <img
                 class="dt_per3"
                 src="../../assets/images/report/person3.png"
@@ -155,7 +155,7 @@
               <span class="dt_blod">出生日期：</span>
               <span>{{ details.birth }}</span>
             </li>
-            <li style="width:2.4rem">
+            <li style="width:3.2rem">
               <img
                 class="dt_per4"
                 src="../../assets/images/report/person4.png"
@@ -164,7 +164,7 @@
               <span class="dt_blod">入学年月：</span>
               <span>{{ details.enterYear }}</span>
             </li>
-            <li style="width:6rem">
+            <li style="width:3.8rem">
               <img
                 class="dt_per5"
                 src="../../assets/images/report/person5.png"
@@ -173,9 +173,9 @@
               <span></span>
               <span>{{ details.schoolName }}</span>
             </li>
-          </ul>
-          <ul>
-            <li style="width:2.2rem">
+          <!-- </ul>
+          <ul> -->
+            <li style="width:3.2rem">
               <img
                 class="dt_per6"
                 src="../../assets/images/report/person6.png"
@@ -184,7 +184,7 @@
               <span class="dt_blod"></span>
               <span>{{ details.className }}</span>
             </li>
-            <li style="width:2.6rem;display:flex">
+            <li style="width:3.2rem;display:flex">
               <img
                 class="dt_per7"
                 src="../../assets/images/report/person7.png"
@@ -195,7 +195,7 @@
                 >第{{ details.evaluationTime }}次</span
               >
             </li>
-            <li style="width:5.4rem">
+            <li style="width:3.8rem">
               <img
                 class="dt_per8"
                 src="../../assets/images/report/person8.png"
@@ -3694,7 +3694,7 @@ export default {
                 margin-left: -0.7rem;
                 left: 0;
                 bottom: 0;
-                top: 0.88rem;
+                top: 0.78rem;
                 width: 1.4rem;
                 height: 0.59rem;
                 display: flex;

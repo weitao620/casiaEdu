@@ -1924,15 +1924,21 @@ export default {
             margin-right: 11px;
           }
         }
-        li:nth-child(3n+1){
-          width: 260px;
+        li:nth-child(2n+1){
+          width: 50%;
         }
-        li:nth-child(3n+2){
-          width: 280px;
+        li:nth-child(2n+2){
+          width: 50%;
         }
-        li:nth-child(3n+3){
-          width: 340px;
-        }
+        // li:nth-child(3n+1){
+        //   width: 260px;
+        // }
+        // li:nth-child(3n+2){
+        //   width: 280px;
+        // }
+        // li:nth-child(3n+3){
+        //   width: 340px;
+        // }
       }
     }
   }

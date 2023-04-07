@@ -16,9 +16,9 @@ module.exports = {
         // 目标 API 地址
         // target: 'http://10.0.6.117:6120',
         // target: "http://172.18.40.12",
-        target: "http://36.110.172.216:8996",
+        // target: "http://36.110.172.216:8996",
         // target: "http://119.90.122.6:6560",
-        // target: 'https://ipathy.net',
+        target: 'https://ipathy.net',
         // target: 'http://119.90.45.121:1120',
         // target: '182.92.212.173:7120',
         // target: 'http://120.25.236.3:8120',
