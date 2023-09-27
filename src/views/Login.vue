@@ -123,7 +123,8 @@ export default {
       let that = this;
       let param = {
         passport: that.ruleForm.usercount,
-        password: that.ruleForm.password
+        password: that.ruleForm.password,
+        schoolId: 'aimw'
       };
       localStorage.setItem('passport', that.ruleForm.usercount)
       // if (that.ruleForm.usercount == 'weitao') {
@@ -175,6 +176,7 @@ export default {
                   data.data.userAuth = JSON.stringify(nOb)
                 }
               }
+              localStorage.setItem("eduToken", data.data.token);
               localStorage.setItem("userAuth", data.data.userAuth);
               localStorage.setItem("userType", data.data.type);
               if (that.ruleForm.remember) {

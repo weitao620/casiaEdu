@@ -25,6 +25,15 @@ axios.defaults.withCredentials = true;
 axios.interceptors.request.use(
   res => {
     console.log(res)
+    console.log(res.url.indexOf("/user/login"))
+    if (res.url.indexOf("/user/login") === -1) {
+      console.log(localStorage.getItem('eduToken'))
+      res.headers['Authorization'] = localStorage.getItem('eduToken');
+      console.log("加鉴权")
+    } else {
+      console.log("不需要鉴权")
+    }
+    
     // // 只针对get方式进行序列化
     // if (res.url.indexOf("/report/exportClassReport") != -1) {
     //   if (res.method === 'get') {
@@ -72,6 +81,7 @@ axios.interceptors.response.use(
       //   callback: () => {
       router.replace({ path: "/login" });
       localStorage.removeItem("isLogin");
+      localStorage.removeItem("eduToken");
       localStorage.removeItem("userInfo");
       localStorage.removeItem("userAuth");
       localStorage.removeItem("passport");

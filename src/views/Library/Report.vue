@@ -1675,6 +1675,7 @@ export default {
     },
     // 团体报告
     groupExport() {
+      console.log(111)
       this.classFlag = true
       this.addClassForm = {
         aside: 2,

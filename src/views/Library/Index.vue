@@ -577,6 +577,7 @@ export default {
                 })
                 .catch(res => {
                   // localStorage.removeItem("isLogin");
+                  // localStorage.removeItem("eduToken");
                   // localStorage.removeItem("userInfo");
                   // localStorage.removeItem("userAuth");
                   // localStorage.removeItem("passport");

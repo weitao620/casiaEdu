@@ -2982,7 +2982,16 @@ export default {
             }
             if (pdfs.length > 1) {
               await zip.generateAsync({ type: "blob" }).then(content => {
-                let nameZip =
+                let nameZip = ''
+                if (this.infoClass.length == 0) {
+                  nameZip =
+                  "团体报告 - " +
+                  "共" +
+                  selectedData.length +
+                  "个班 - " +
+                  this.formTimes(new Date());
+                } else {
+                  nameZip =
                   "团体报告 - " +
                   "共" +
                   selectedData.length +
@@ -2990,6 +2999,8 @@ export default {
                   this.infoClass.join('、') +
                   "无报告数据） - " +
                   this.formTimes(new Date());
+                }
+                
                 FileSaver.saveAs(content, nameZip + ".zip");
               });
               setTimeout(() => {

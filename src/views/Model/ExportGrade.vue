@@ -6,7 +6,7 @@
         class="group_p_01"
         :style="{ 'font-size': schoolName.length > 7 ? '32px' : '40px' }"
       >
-        {{ schoolName }} — {{ gradeName }}年级
+        {{ schoolName }} — {{ gradeName }}
       </p>
       <div class="group_tips">
         <img src="../../assets/images/group/tip_group.png" alt="" />
@@ -32,7 +32,7 @@
           <div class="gp2l_body">
             <img src="../../assets/images/group/g_023.png" alt="" />
             <div class="gp2lb_txt">
-              <span>{{ schoolName }} · {{ gradeName }}年级</span>
+              <span>{{ schoolName }} · {{ gradeName }}</span>
             </div>
           </div>
         </div>
@@ -1994,6 +1994,7 @@ export default {
           console.log(Math.round(selectedData[i].DimRisk.depressionInfo.lightPerct.toFixed(4) * 10000))
           console.log(selectedData[i].DimRisk.depressionInfo.lightPerct.toFixed(4) * 10000 / 100)
           console.log(this.perctInfo(selectedData[i].DimRisk.depressionInfo.lightPerct))
+          
           let perctList = [
             {
               id: 1,
@@ -2003,6 +2004,7 @@ export default {
               male: selectedData[i].EvaResult.maleDepNum,
               female: selectedData[i].EvaResult.femaleDepNum,
               classList: classDepName,
+              classPerct: classDepPerct,
               max: max1,
               mark: this.perctInfo(selectedData[i].Suggestion.depPerct),
               // perct: 0.12,
@@ -2033,6 +2035,7 @@ export default {
               male: selectedData[i].EvaResult.maleAnxNum,
               female: selectedData[i].EvaResult.femaleAnxNum,
               classList: classAnxName,
+              classPerct: classAnxPerct,
               max: max2,
               mark: this.perctInfo(selectedData[i].Suggestion.anxietyPerct),
               // perct: 0,
@@ -2063,6 +2066,7 @@ export default {
               male: selectedData[i].EvaResult.maleForNum,
               female: selectedData[i].EvaResult.femaleForNum,
               classList: classForName,
+              classPerct: classForPerct,
               max: max3,
               mark: this.perctInfo(selectedData[i].Suggestion.forcedPerct),
               // perct: 0,
@@ -2199,6 +2203,7 @@ export default {
             }
           }
           this.systemList = perctList
+          console.log(this.systemList)
           // suggestion
           // 本年级测评人数占比
           if (selectedData[i].Suggestion.evaPerct > 0.5) {
@@ -2682,7 +2687,7 @@ export default {
               position: 'top',
               formatter: '{c}%'
             },
-            data: this.classDepPerct,
+            data: this.systemList[0].classPerct,
             markLine: {
               symbol: "none",
               lineStyle: {
@@ -2778,7 +2783,7 @@ export default {
               position: 'top',
               formatter: '{c}%'
             },
-            data: this.classAnxPerct,
+            data: this.systemList[1].classPerct,
             markLine: {
               symbol: "none",
               lineStyle: {
@@ -2874,7 +2879,7 @@ export default {
               position: 'top',
               formatter: '{c}%'
             },
-            data: this.classForPerct,
+            data: this.systemList[2].classPerct,
             markLine: {
               symbol: "none",
               lineStyle: {
