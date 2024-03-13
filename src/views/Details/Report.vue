@@ -121,8 +121,12 @@
       </div>
       <img src="../../assets/images/report/teacherRbg.png" alt="" />
       <div class="dt_person" ref="parts0">
-        <div class="dtp_photo">
+        <!-- <div class="dtp_photo">
           <img src="../../assets/images/report/human.png" alt="" />
+        </div> -->
+        <div class="dtp_photo">
+          <img v-if="String(details.gender) == '1'"  src="../../assets/images/report/human.png" alt="" />
+          <img v-if="String(details.gender) == '0'" style="width: 1.3rem;height:1.3rem;margin-top:0.09rem" src="../../assets/images/report/huwoman.png" alt="" />
         </div>
         <div class="dtp_main">
           <ul>

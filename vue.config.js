@@ -19,6 +19,7 @@ module.exports = {
         // target: "http://36.110.172.216:8996",
         // target: "http://119.90.122.6:6560",
         target: 'https://ipathy.net',
+        // target: 'http://36.110.172.216:8996',
         // target: 'http://119.90.45.121:1120',
         // target: '182.92.212.173:7120',
         // target: 'http://120.25.236.3:8120',

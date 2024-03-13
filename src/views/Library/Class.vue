@@ -329,8 +329,8 @@
           <el-input
             class="small_class"
             v-model="addClassForm.classNew"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
-            placeholder="请输入数字"
+            onkeyup="value=value.replace(/^0/g,'').replace(/[^\d]/g,'')"
+            placeholder="请输入班级序号"
           ></el-input>
           <span>班</span>
           <div class="tip_left" v-show="addLessonOne">
@@ -1129,6 +1129,14 @@ export default {
         this.addNumberOne = true;
         return false;
       }
+      if (Number(this.addClassForm.sort) + Number(this.addClassForm.number)>100 || Number(this.addClassForm.sort) + Number(this.addClassForm.number)< 1) {
+        // this.addNumberOne = true;
+        that.$message({
+          type: "error",
+          message: "班级起始序号与班级数量之和不能大于100！"
+        });
+        return false;
+      }
       let arrNew = new Array(Number(that.addClassForm.number));
       let arrClass = [];
       // console.log(arrNew);
@@ -1179,6 +1187,14 @@ export default {
       }
       if (this.addClassForm.classNew == "") {
         this.addLessonOne = true;
+        return false;
+      }
+      if (this.addClassForm.classNew > 99 || this.addClassForm.classNew < 1) {
+        // this.addLessonOne = true;
+        that.$message({
+          type: "error",
+          message: "请填写1~99的班级序号！"
+        });
         return false;
       }
       let param = [
